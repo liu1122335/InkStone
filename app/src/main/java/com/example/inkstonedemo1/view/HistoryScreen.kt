@@ -6,6 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun HistoryScreen(
@@ -15,6 +16,6 @@ fun HistoryScreen(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ){
-        Text(text = "这里是历史板块")
+        VerticalText(text = "描述啊打发手动阀反对", color = Color.Black)
     }
 }

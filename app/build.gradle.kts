@@ -41,7 +41,7 @@ android {
         mlModelBinding = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.4.8"
     }
     packaging {
         resources {
@@ -49,11 +49,6 @@ android {
         }
     }
 
-/*    configurations{
-        all {
-            exclude(group = "com.google.flatbuffers")
-        }
-    }*/
 }
 
 dependencies {
@@ -80,8 +75,10 @@ dependencies {
     implementation("androidx.camera:camera-view:1.3.1")
     implementation("androidx.camera:camera-extensions:1.3.1")
     implementation("io.coil-kt:coil-compose:2.5.0")
-    //implementation("io.github.sceneview:arsceneview:2.0.3")
     implementation("org.tensorflow:tensorflow-lite-gpu:2.3.0")
+
+    implementation(project(":arsceneview"))
+    implementation(project(":sceneview"))
 
 
     testImplementation("junit:junit:4.13.2")

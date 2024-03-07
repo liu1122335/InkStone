@@ -1,4 +1,3 @@
-/*
 
 package com.example.inkstonedemo1.view
 
@@ -48,7 +47,7 @@ import io.github.sceneview.rememberNodes
 import io.github.sceneview.rememberOnGestureListener
 import io.github.sceneview.rememberView
 
-private const val kModelFile = "models/bears.glb"
+private const val kModelFile = "3Dmodels/bears.glb"
 private const val kMaxModelInstances = 10
 
 @Composable
@@ -194,4 +193,3 @@ fun createAnchorNode(
     return anchorNode
 }
 
-*/

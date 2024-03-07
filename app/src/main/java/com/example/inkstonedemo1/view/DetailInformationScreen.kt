@@ -1,8 +1,6 @@
 package com.example.inkstonedemo1.view
 
-import android.content.ContentValues.TAG
-import android.speech.tts.TextToSpeech
-import android.util.Log
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -10,30 +8,44 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -46,7 +58,6 @@ import com.example.inkstonedemo1.model.ARShowDestination
 import com.example.inkstonedemo1.model.MainInformationDestination
 import com.example.inkstonedemo1.model.MainShowDestination
 import com.example.inkstonedemo1.model.allDestinations
-import java.util.Locale
 
 @Composable
 fun DetailInformationScreen(
@@ -66,7 +77,7 @@ fun DetailInformationScreen(
                 MainInformationScreen(navController = navController, mainNavController = mainNavController)
             }
             composable(route = ARShowDestination.route){
-                //ARShowScreen()
+                ARShowScreen()
             }
         }
     )
@@ -78,7 +89,7 @@ fun MainInformationScreen(
     navController: NavController
 ){
 
-    val toolbarHeight = 300.dp
+    val toolbarHeight = 500.dp
     val maxUpPx = with(LocalDensity.current) { toolbarHeight.roundToPx().toFloat() - 56.dp.roundToPx().toFloat() }
     // ToolBar 最小向上位移量
     val minUpPx = 0f
@@ -107,10 +118,8 @@ fun MainInformationScreen(
                 FunctionButton(modifier = Modifier, navController = navController)
             }
 
-            items(100) { index ->
-                Text("I'm item $index", modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp))
+            item {
+                FirstTextContent()
             }
         }
         ScrollableAppBar(
@@ -152,6 +161,7 @@ fun FunctionButton(
             Image(painter = painterResource(id = R.drawable.ic_ar), contentDescription = "")
         }
 
+
         //收藏按钮
         FloatingActionButton(
             onClick = {
@@ -184,3 +194,50 @@ fun FunctionButton(
     }
 
 }
+@Composable
+fun FirstTextContent(
+    
+){
+    Row (
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ){
+        VerticalText(
+            text = "描述",
+            color = Color.Black,
+            modifier = Modifier
+                .padding(start = 20.dp)
+        )
+
+        Spacer(modifier = Modifier.width(30.dp))
+
+        Text(
+            text = "这里是正文啊暗杀阿斯蒂芬卡拉来得及发士大夫啊快递费杰克萨利啊的撒开了房间啊是",
+            modifier = Modifier.padding(end = 20.dp)
+        )
+    }
+}
+@Composable
+fun VerticalText(
+    text: String,
+    color: Color = Color.Unspecified,
+    textStyle: TextStyle = LocalTextStyle.current,
+    modifier: Modifier = Modifier
+) {
+    val textMeasurer = rememberTextMeasurer()
+
+    Box(modifier = modifier){
+        Canvas(modifier = modifier) {
+            text.toCharArray().forEachIndexed { index, it ->
+                val textLayoutResult = textMeasurer.measure(it.toString(), textStyle)
+                textLayoutResult.lastBaseline
+                drawText(
+                    textLayoutResult,
+                    color,
+                    Offset(0f, index * textLayoutResult.lastBaseline)
+                )
+            }
+        }
+
+    }
+}
+
