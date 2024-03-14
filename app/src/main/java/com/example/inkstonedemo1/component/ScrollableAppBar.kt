@@ -2,7 +2,7 @@ package com.example.inkstonedemo1.component
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,10 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.FloatingActionButtonDefaults
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -25,8 +22,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -35,17 +32,17 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.compose.dark_golden
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.model.ARShowDestination
 import com.example.inkstonedemo1.view.navigateSingleTopTo
 import kotlin.math.roundToInt
 
-
 @Composable
 fun ScrollableAppBar(
     mainNavController: NavController,
+    navController : NavController,
     modifier: Modifier = Modifier,
+    isCollected : Boolean ,
     title: String = stringResource(id = R.string.app_name), //默认为应用名
     navigationIcon: @Composable () -> Unit =
         {
@@ -61,8 +58,10 @@ fun ScrollableAppBar(
             )
         }, //默认为返回键
     @DrawableRes backgroundImageId: Int, // 背景图片
+    color: Color,
     scrollableAppBarHeight: Dp,
-    toolbarOffsetHeightPx: MutableState<Float> //向上偏移量
+    toolbarOffsetHeightPx: MutableState<Float>, //向上偏移量
+    onCollectedChanged : (Boolean) -> Unit
 ) {
 
     // 应用栏最大向上偏移量
@@ -76,8 +75,56 @@ fun ScrollableAppBar(
             IntOffset(x = 0, y = toolbarOffsetHeightPx.value.roundToInt()) //设置偏移量
         }
         .fillMaxWidth()
+        .background(color = color)
+        .clip(RoundedCornerShape(20.dp)),
     ) {
-        Image(painter = painterResource(id = backgroundImageId), contentDescription = "background", contentScale = ContentScale.FillBounds, modifier = Modifier.fillMaxSize())
+        Image(
+            painter = painterResource(id = backgroundImageId),
+            contentDescription = "background",
+            modifier = modifier
+                .align(Alignment.Center)
+                .size(300.dp)
+                .padding(bottom = 30.dp),
+        )
+
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .background(color = Color.Transparent)
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 20.dp)
+                .offset {
+                    IntOffset(
+                        x = 0,
+                        y = -100
+                    )
+                },
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            //跳转AR展示画面
+            DraggableTab(
+                modifier = Modifier.padding(top = 20.dp, bottom = 10.dp),
+                imageId = R.drawable.ic_ar
+            ) {
+                navController.navigateSingleTopTo(ARShowDestination.route)
+            }
+
+            //收藏按钮
+            DraggableTab(
+                modifier = Modifier.padding(top = 20.dp, bottom = 10.dp),
+                imageId = if (isCollected) R.drawable.ic_collected else R.drawable.ic_uncollected
+            ) {
+                onCollectedChanged(!isCollected)
+            }
+
+            //朗读功能
+            DraggableTab(
+                modifier = Modifier.padding(top = 20.dp, bottom = 10.dp),
+                imageId = R.drawable.ic_text_to_speech
+            ) {
+
+            }
+        }
         
         // 自定义应用栏
         Row(
@@ -88,6 +135,7 @@ fun ScrollableAppBar(
                         y = -toolbarOffsetHeightPx.value.roundToInt() //保证应用栏是始终不动的
                     )
                 }
+                .align(Alignment.TopStart)
                 .height(toolBarHeight)
                 .fillMaxWidth()
                 .padding(top = 30.dp),

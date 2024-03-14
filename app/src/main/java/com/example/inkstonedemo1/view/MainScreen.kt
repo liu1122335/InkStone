@@ -8,20 +8,20 @@ import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,20 +29,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.compose.dark_golden
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.component.DotIndicators
+import com.example.inkstonedemo1.component.DraggableTab
 import com.example.inkstonedemo1.data.allColors
 import com.example.inkstonedemo1.data.allInkStoneImages
 import com.example.inkstonedemo1.data.allPatterns
@@ -53,11 +52,15 @@ import com.example.inkstonedemo1.model.KnowledgeDestination
 import com.example.inkstonedemo1.model.MainShowDestination
 import com.example.inkstonedemo1.model.UserDestination
 import com.example.inkstonedemo1.model.allDestinations
+import com.example.inkstonedemo1.view.detailInformation.DetailInformationScreen
+import com.example.inkstonedemo1.view.knowledge.KnowledgeScreen
+import com.example.inkstonedemo1.viewmodel.MainScreenViewModel
 
 @Composable
 fun MainScreen(
-    modifier: Modifier = Modifier.fillMaxSize()
+    mainScreenViewModel: MainScreenViewModel = viewModel()
 ){
+    val mainScreenUiState by mainScreenViewModel.uiState.collectAsState()
 
     val navController = rememberNavController()
     val currentBackStack by navController.currentBackStackEntryAsState()
@@ -68,7 +71,10 @@ fun MainScreen(
         startDestination = MainShowDestination.route,
         builder = {
             composable(route = MainShowDestination.route){
-                MainShowScreen(navController = navController)
+                MainShowScreen(
+                    navController = navController,
+                    onPageChanged = { mainScreenViewModel.updateCurrentPageId(it) }
+                )
             }
             composable(route = KnowledgeDestination.route){
                 KnowledgeScreen()
@@ -77,7 +83,11 @@ fun MainScreen(
                 HistoryScreen()
             }
             composable(route = DetailInformationDestination.route){
-                DetailInformationScreen(mainNavController = navController)
+                DetailInformationScreen(
+                    mainNavController = navController,
+                    currentImage = allInkStoneImages[mainScreenUiState.currentInkStoneId],
+                    currentColor = allColors[mainScreenUiState.currentInkStoneId]
+                )
             }
             composable(route = UserDestination.route){
                 UserScreen()
@@ -105,17 +115,15 @@ fun MainScreen(
             }
         }
     )
-
-
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainShowScreen(
-    lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
-    navController: NavController
+    navController: NavController,
+    onPageChanged : (Int) -> Unit
 ){
-    val pagerCount = 3
+    val pagerCount = allInkStoneImages.size
     val pagerState = rememberPagerState {
         pagerCount
     }
@@ -124,7 +132,7 @@ fun MainShowScreen(
     var currentPage by remember { mutableStateOf(0) }
     val backgroundColor by animateColorAsState(
         targetValue = currentColor,
-        animationSpec = tween(durationMillis = 1500, delayMillis = 2)
+        animationSpec = tween(durationMillis = 1200, delayMillis = 2)
     )
 
     Box(
@@ -142,82 +150,59 @@ fun MainShowScreen(
                 .height(550.dp),
         ) {index ->
             Log.d("currentPage",pagerState.currentPage.toString())
+            Log.d("index",index.toString())
             currentPage = pagerState.currentPage
             currentColor = allColors[currentPage]
+            onPageChanged(currentPage)
 
             InkStonePage(navController = navController, patternId = allPatterns[index], inkStoneId = allInkStoneImages[index])
-        }
-
-        //跳转知识库按钮
-        FloatingActionButton(
-            onClick = {
-                 navController.navigateSingleTopTo(KnowledgeDestination.route)
-            },
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(top = 40.dp, end = 20.dp)
-                .border(width = 3.dp, color = dark_golden, shape = CircleShape)
-                .size(55.dp),
-            containerColor = Color.Transparent,
-            elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 0.dp, pressedElevation = 0.dp)
-        ) {
-            Image(painter = painterResource(id = R.drawable.ic_knowledge), contentDescription = "")
-        }
-
-        //跳转历史线按钮
-        FloatingActionButton(
-            onClick = {
-                navController.navigateSingleTopTo(HistoryDestination.route)
-            },
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .padding(top = 40.dp, start = 20.dp)
-                .border(width = 3.dp, color = dark_golden, shape = CircleShape)
-                .size(55.dp),
-            containerColor = Color.Transparent,
-            elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 0.dp, pressedElevation = 0.dp)
-        ) {
-            Image(painter = painterResource(id = R.drawable.ic_history), contentDescription = "")
-        }
-
-        //跳转用户界面按钮
-        FloatingActionButton(
-            onClick = {
-                navController.navigateSingleTopTo(UserDestination.route)
-            },
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(end = 30.dp, bottom = 30.dp)
-                .size(55.dp),
-            containerColor = Color.Transparent,
-            elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 0.dp, pressedElevation = 0.dp)
-        ) {
-            Image(painter = painterResource(id = R.drawable.ic_user), contentDescription = "", modifier = Modifier.fillMaxSize())
-        }
-
-        //跳转至识别界面
-        FloatingActionButton(
-            onClick = {
-                navController.navigateSingleTopTo(IdentifyDestination.route)
-            },
-            modifier = Modifier
-                .align(Alignment.BottomStart)
-                .padding(start = 30.dp, bottom = 30.dp)
-                .size(55.dp),
-            containerColor = Color.Transparent,
-            elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 0.dp, pressedElevation = 0.dp)
-        ) {
-            Image(painter = painterResource(id = R.drawable.ic_identify), contentDescription = "", modifier = Modifier.fillMaxSize())
         }
 
         //底部指示器
         DotIndicators(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 30.dp),
+                .padding(bottom = 90.dp),
             pagerCount = pagerCount,
             pagerState = pagerState
         )
+
+        Row (
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 30.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ){
+            //跳转至识别界面
+            DraggableTab(
+                modifier = Modifier,
+                imageId = R.drawable.ic_identify,
+                onClick = { navController.navigateSingleTopTo(IdentifyDestination.route) },
+            )
+
+            //跳转历史线按钮
+            DraggableTab(
+                modifier = Modifier,
+                imageId = R.drawable.ic_history,
+                onClick = { navController.navigateSingleTopTo(HistoryDestination.route) },
+            )
+
+            //跳转知识库按钮
+            DraggableTab(
+                modifier = Modifier,
+                imageId = R.drawable.ic_knowledge,
+                onClick = { navController.navigateSingleTopTo(KnowledgeDestination.route) },
+            )
+
+            //跳转用户界面按钮
+            DraggableTab(
+                modifier = Modifier,
+                imageId = R.drawable.ic_user,
+                onClick = { navController.navigateSingleTopTo(UserDestination.route) },
+            )
+
+        }
     }
 
 }
@@ -268,5 +253,4 @@ fun NavController.navigateSingleTopTo(route : String)=
         }
         launchSingleTop = true
         restoreState = true
-
     }

@@ -5,6 +5,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
@@ -19,6 +21,7 @@ import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.File
+import java.io.FileDescriptor
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.Executor
@@ -103,4 +106,23 @@ fun identifyPhoto(
     }
 
     return allInkStoneClasses[index]
+}
+
+fun rotateIfRequired(bitmap: Bitmap,fileDescriptor: FileDescriptor) : Bitmap{
+    val exif = ExifInterface(fileDescriptor)
+    val orientation =  exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_NORMAL)
+    return when (orientation){
+        ExifInterface.ORIENTATION_ROTATE_90 -> rotateBitmap(bitmap,90)
+        ExifInterface.ORIENTATION_ROTATE_180 -> rotateBitmap(bitmap,180)
+        ExifInterface.ORIENTATION_ROTATE_270 -> rotateBitmap(bitmap,270)
+        else -> bitmap
+    }
+}
+
+fun rotateBitmap(bitmap: Bitmap,degree: Int) : Bitmap{
+    val matrix = Matrix()
+    matrix.postRotate(degree.toFloat())
+    val rotatedBitmap = Bitmap.createBitmap(bitmap,0,0,bitmap.width,bitmap.height,matrix,true)
+    bitmap.recycle()
+    return rotatedBitmap
 }

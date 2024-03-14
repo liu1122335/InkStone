@@ -2,15 +2,12 @@ package com.example.inkstonedemo1.component
 
 import android.Manifest
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCapture.FlashMode
 import androidx.camera.core.Preview
 import androidx.camera.view.PreviewView
 import androidx.compose.animation.core.animateIntAsState
@@ -27,10 +24,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -41,10 +36,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
@@ -55,8 +48,6 @@ import com.example.inkstonedemo1.utils.startTakePhoto
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionRequired
 import com.google.accompanist.permissions.rememberPermissionState
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 
 @OptIn(ExperimentalPermissionsApi::class, ExperimentalMaterialApi::class)
@@ -149,7 +140,7 @@ fun PreviewView(
         //预览界面
         AndroidView(
             factory = { previewView },
-            modifier = Modifier.fillMaxHeight(0.75f)
+            modifier = Modifier.fillMaxHeight(0.80f)
         )
 
         Row (
