@@ -1,7 +1,6 @@
 package com.example.inkstonedemo1.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.example.inkstonedemo1.model.HistoryKnowledge
 import com.example.inkstonedemo1.model.uistate.HistoryKnowledgeScreenUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

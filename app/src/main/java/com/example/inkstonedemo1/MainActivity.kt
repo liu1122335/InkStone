@@ -1,10 +1,13 @@
 package com.example.inkstonedemo1
 
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -34,7 +37,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     tonalElevation = 5.dp
                 ) {
-                    ThisApp(modifier = Modifier.fillMaxSize());
+                    ThisApp();
                 }
             }
         }
@@ -42,7 +45,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun ThisApp(
-        modifier: Modifier
+        modifier: Modifier = Modifier
     ){
         MainScreen()
     }

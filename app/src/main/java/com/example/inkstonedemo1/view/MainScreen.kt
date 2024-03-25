@@ -10,11 +10,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -37,22 +34,19 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.component.DotIndicators
 import com.example.inkstonedemo1.component.DraggableTab
 import com.example.inkstonedemo1.data.allColors
 import com.example.inkstonedemo1.data.allInkStoneImages
 import com.example.inkstonedemo1.data.allPatterns
 import com.example.inkstonedemo1.model.DetailInformationDestination
-import com.example.inkstonedemo1.model.HistoryDestination
 import com.example.inkstonedemo1.model.IdentifyDestination
 import com.example.inkstonedemo1.model.KnowledgeDestination
 import com.example.inkstonedemo1.model.MainShowDestination
 import com.example.inkstonedemo1.model.UserDestination
-import com.example.inkstonedemo1.model.allDestinations
-import com.example.inkstonedemo1.view.detailInformation.DetailInformationScreen
+import com.example.inkstonedemo1.model.FunnyDestination
+import com.example.inkstonedemo1.view.funny.FunnyScreen
 import com.example.inkstonedemo1.view.knowledge.KnowledgeScreen
 import com.example.inkstonedemo1.viewmodel.MainScreenViewModel
 
@@ -63,9 +57,7 @@ fun MainScreen(
     val mainScreenUiState by mainScreenViewModel.uiState.collectAsState()
 
     val navController = rememberNavController()
-    val currentBackStack by navController.currentBackStackEntryAsState()
-    val currentDestination = currentBackStack?.destination
-    val currentScreen = allDestinations.find { it.route == currentDestination?.route }?:MainShowDestination
+
     NavHost(
         navController = navController,
         startDestination = MainShowDestination.route,
@@ -79,8 +71,8 @@ fun MainScreen(
             composable(route = KnowledgeDestination.route){
                 KnowledgeScreen()
             }
-            composable(route = HistoryDestination.route){
-                HistoryScreen()
+            composable(route = FunnyDestination.route){
+                FunnyScreen()
             }
             composable(route = DetailInformationDestination.route){
                 DetailInformationScreen(
@@ -162,47 +154,45 @@ fun MainShowScreen(
         DotIndicators(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 90.dp),
+                .padding(bottom = 20.dp),
             pagerCount = pagerCount,
             pagerState = pagerState
         )
-
-        Row (
+        //跳转至识别界面
+        DraggableTab(
             modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 30.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ){
-            //跳转至识别界面
-            DraggableTab(
-                modifier = Modifier,
-                imageId = R.drawable.ic_identify,
-                onClick = { navController.navigateSingleTopTo(IdentifyDestination.route) },
-            )
+                .align(Alignment.BottomStart)
+                .padding(bottom = 25.dp, start = 20.dp),
+            imageId = IdentifyDestination.icon,
+            onClick = { navController.navigateSingleTopTo(IdentifyDestination.route) },
+        )
 
-            //跳转历史线按钮
-            DraggableTab(
-                modifier = Modifier,
-                imageId = R.drawable.ic_history,
-                onClick = { navController.navigateSingleTopTo(HistoryDestination.route) },
-            )
+        //跳转趣玩按钮
+        DraggableTab(
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(top = 30.dp, start = 20.dp),
+            imageId = FunnyDestination.icon,
+            onClick = { navController.navigateSingleTopTo(FunnyDestination.route) },
+        )
 
-            //跳转知识库按钮
-            DraggableTab(
-                modifier = Modifier,
-                imageId = R.drawable.ic_knowledge,
-                onClick = { navController.navigateSingleTopTo(KnowledgeDestination.route) },
-            )
+        //跳转知识库按钮
+        DraggableTab(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(top = 30.dp, end = 20.dp),
+            imageId = KnowledgeDestination.icon,
+            onClick = { navController.navigateSingleTopTo(KnowledgeDestination.route) },
+        )
 
-            //跳转用户界面按钮
-            DraggableTab(
-                modifier = Modifier,
-                imageId = R.drawable.ic_user,
-                onClick = { navController.navigateSingleTopTo(UserDestination.route) },
-            )
-
-        }
+        //跳转用户界面按钮
+        DraggableTab(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(bottom = 25.dp, end = 20.dp),
+            imageId = UserDestination.icon,
+            onClick = { navController.navigateSingleTopTo(UserDestination.route) },
+        )
     }
 
 }

@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
@@ -34,14 +35,18 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.example.compose.md_theme_light_onTertiaryContainer
+import com.example.compose.md_theme_light_primaryContainer
+import com.example.compose.md_theme_light_tertiaryContainer
 
 @Composable
 fun ExtendedFab(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (Int) -> Unit
 ) {
 
     var expanded: Boolean by remember {
-        mutableStateOf(false)
+        mutableStateOf(true)
     }
 
     val alpha by animateFloatAsState(
@@ -51,7 +56,7 @@ fun ExtendedFab(
     )
 
     ShaderContainer(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
     ) {
 
         ButtonComponent(
@@ -62,13 +67,12 @@ fun ExtendedFab(
                     .transform((alpha))
             ),
             onClick = {
-                expanded = !expanded
+                onClick(1)
             }
         ) {
-            Icon(
-                imageVector = Icons.Default.Edit,
-                contentDescription = null,
-                tint = Color.White,
+            Text(
+                text = "型",
+                color = Color.White,
                 modifier = Modifier.alpha(alpha)
             )
         }
@@ -80,13 +84,12 @@ fun ExtendedFab(
                 ) * FastOutSlowInEasing.transform(alpha)
             ),
             onClick = {
-                expanded = !expanded
+                onClick(2)
             }
         ) {
-            Icon(
-                imageVector = Icons.Default.LocationOn,
-                contentDescription = null,
-                tint = Color.White,
+            Text(
+                text = "材",
+                color = Color.White,
                 modifier = Modifier.alpha(alpha)
             )
         }
@@ -98,19 +101,18 @@ fun ExtendedFab(
                 ) * FastOutSlowInEasing.transform(alpha)
             ),
             onClick = {
-                expanded = !expanded
+                onClick(3)
             }
         ) {
-            Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = null,
-                tint = Color.White,
+            Text(
+                text = "保存",
+                color = Color.White,
                 modifier = Modifier.alpha(alpha)
             )
         }
 
         ButtonComponent(
-            Modifier.align(Alignment.BottomStart),
+            Modifier.align(Alignment.TopStart),
             onClick = {
                 expanded = !expanded
             },
@@ -121,7 +123,7 @@ fun ExtendedFab(
                 animationSpec = tween(1000, easing = FastOutSlowInEasing)
             )
             Icon(
-                imageVector = Icons.Default.Add,
+                imageVector = Icons.Default.Edit,
                 contentDescription = null,
                 modifier = Modifier.rotate(rotation),
                 tint = Color.White
@@ -146,7 +148,7 @@ fun BoxScope.ButtonComponent(
                 indication = null,
                 onClick = onClick,
             )
-            .align(Alignment.BottomStart),
+            .align(Alignment.TopStart),
         component = {
             Box(
                 Modifier

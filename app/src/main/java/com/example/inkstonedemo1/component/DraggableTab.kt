@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,8 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.example.compose.Gold
-import com.example.compose.dark_golden
 import kotlin.math.roundToInt
 
 @Composable
@@ -37,10 +36,10 @@ fun DraggableTab(
             .offset {
                 IntOffset(offset.x.roundToInt(), offset.y.roundToInt())
             }
-            .border(width = 3.dp, color = Gold, shape = CircleShape),
+            .border(width = 3.dp, color = Color.Black, shape = CircleShape),
         containerColor = Color.Transparent,
         elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 0.dp, pressedElevation = 0.dp)
     ) {
-        Image(painter = painterResource(id = imageId), contentDescription = "")
+        Icon(painter = painterResource(id = imageId), contentDescription = "", tint = Color.Black)
     }
 }

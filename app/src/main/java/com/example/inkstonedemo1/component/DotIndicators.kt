@@ -13,15 +13,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.compose.Gold
-import com.example.compose.dark_golden
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -37,7 +35,7 @@ fun DotIndicators(
         verticalAlignment = Alignment.Bottom
     ){
         repeat(pagerCount){iteration ->
-            val color by animateColorAsState(if (pagerState.currentPage == iteration) Gold else MaterialTheme.colorScheme.onPrimary)
+            val color by animateColorAsState(if (pagerState.currentPage == iteration) Color.Black else MaterialTheme.colorScheme.onPrimary)
             val coroutineScope = rememberCoroutineScope()
             Canvas(modifier = Modifier
                 .size(15.dp)

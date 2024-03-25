@@ -78,7 +78,6 @@ fun IdentifyScreen(
             },
             sheetShape = RoundedCornerShape(17.dp)
         ) {
-
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                 PreviewLayout(
                     context = context,

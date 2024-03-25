@@ -74,12 +74,15 @@ dependencies {
     implementation("androidx.camera:camera-lifecycle:1.3.1")
     implementation("androidx.camera:camera-view:1.3.1")
     implementation("androidx.camera:camera-extensions:1.3.1")
-    implementation("io.coil-kt:coil-compose:2.5.0")
     implementation("org.tensorflow:tensorflow-lite-gpu:2.3.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation("com.google.vr:sdk-panowidget:1.80.0")
+    implementation("com.google.vr:sdk-videowidget:1.80.0")
 
     implementation(project(":arsceneview"))
     implementation(project(":sceneview"))
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.8.0")
 
 
     testImplementation("junit:junit:4.13.2")

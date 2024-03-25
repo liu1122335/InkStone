@@ -35,8 +35,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import com.example.compose.Gold
-import com.example.compose.knowledge_screen_top_bar_bg_color
 import com.example.inkstonedemo1.model.Destination
 
 @Composable
@@ -48,7 +46,7 @@ fun MainTabRow(
 ){
     Box (
         modifier = Modifier
-            .height(90.dp)
+            .height(80.dp)
             .background(color = backgroundColor),
         contentAlignment = Alignment.BottomCenter
     ){
@@ -78,7 +76,7 @@ fun MyTab(
     onSelected : () -> Unit,
     isSelected : Boolean
 ){
-    val color = Gold
+    val color = Color.Black
     val durationMillis = if (isSelected) 150 else 100
     val animSpec = remember {
         tween<Color>(
