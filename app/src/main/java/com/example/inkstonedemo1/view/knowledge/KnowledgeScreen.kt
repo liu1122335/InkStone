@@ -7,7 +7,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.res.painterResource
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -17,7 +16,6 @@ import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.component.MainTabRow
 import com.example.inkstonedemo1.model.AppreciateKnowledgeDestination
 import com.example.inkstonedemo1.model.HistoryKnowledgeDestination
-import com.example.inkstonedemo1.model.VisitTilesDestination
 import com.example.inkstonedemo1.model.knowledgeDestinations
 import com.example.inkstonedemo1.view.navigateSingleTopTo
 

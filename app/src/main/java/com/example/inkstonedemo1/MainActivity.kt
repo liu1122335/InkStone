@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import com.example.compose.InkStoneDemo1Theme
+import com.example.inkstonedemo1.room.InkStoneDatabase
 import com.example.inkstonedemo1.view.MainScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -23,6 +24,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window,false)
+
         setContent {
             val systemUiController = rememberSystemUiController()
             val useDarkTheme = !isSystemInDarkTheme()

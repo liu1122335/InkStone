@@ -22,6 +22,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,8 +38,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.inkstonedemo1.component.DotIndicators
 import com.example.inkstonedemo1.component.DraggableTab
+import com.example.inkstonedemo1.data.InitInkStoneData
 import com.example.inkstonedemo1.data.allColors
-import com.example.inkstonedemo1.data.allInkStoneImages
 import com.example.inkstonedemo1.data.allPatterns
 import com.example.inkstonedemo1.model.DetailInformationDestination
 import com.example.inkstonedemo1.model.IdentifyDestination
@@ -46,15 +47,32 @@ import com.example.inkstonedemo1.model.KnowledgeDestination
 import com.example.inkstonedemo1.model.MainShowDestination
 import com.example.inkstonedemo1.model.UserDestination
 import com.example.inkstonedemo1.model.FunnyDestination
+import com.example.inkstonedemo1.room.InkStone
+import com.example.inkstonedemo1.room.InkStoneDatabase
+import com.example.inkstonedemo1.view.detail.DetailInformationScreen
 import com.example.inkstonedemo1.view.funny.FunnyScreen
+import com.example.inkstonedemo1.view.identify.IdentifyScreen
 import com.example.inkstonedemo1.view.knowledge.KnowledgeScreen
 import com.example.inkstonedemo1.viewmodel.MainScreenViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun MainScreen(
     mainScreenViewModel: MainScreenViewModel = viewModel()
 ){
     val mainScreenUiState by mainScreenViewModel.uiState.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
+    val allInkStone by mainScreenViewModel.allInkStone.collectAsState(initial = InitInkStoneData)
+
+    if (allInkStone.isEmpty()){
+        coroutineScope.launch {
+            for (inkStone in InitInkStoneData){
+                mainScreenViewModel.insertInkStone(inkStone)
+            }
+        }
+    }
+
+    val showInkStoneList = allInkStone.take(10)
 
     val navController = rememberNavController()
 
@@ -65,7 +83,8 @@ fun MainScreen(
             composable(route = MainShowDestination.route){
                 MainShowScreen(
                     navController = navController,
-                    onPageChanged = { mainScreenViewModel.updateCurrentPageId(it) }
+                    onPageChanged = { mainScreenViewModel.updateCurrentPageId(it) },
+                    allInkStone = showInkStoneList
                 )
             }
             composable(route = KnowledgeDestination.route){
@@ -77,12 +96,13 @@ fun MainScreen(
             composable(route = DetailInformationDestination.route){
                 DetailInformationScreen(
                     mainNavController = navController,
-                    currentImage = allInkStoneImages[mainScreenUiState.currentInkStoneId],
-                    currentColor = allColors[mainScreenUiState.currentInkStoneId]
+                    currentColor = allColors[mainScreenUiState.currentInkStoneId],
+                    inkStone = showInkStoneList[mainScreenUiState.currentInkStoneId],
+                    mainScreenViewModel = mainScreenViewModel,
                 )
             }
             composable(route = UserDestination.route){
-                UserScreen()
+                UserScreen(navController = navController)
             }
             composable(
                 route = IdentifyDestination.route,
@@ -113,9 +133,10 @@ fun MainScreen(
 @Composable
 fun MainShowScreen(
     navController: NavController,
-    onPageChanged : (Int) -> Unit
+    onPageChanged : (Int) -> Unit,
+    allInkStone : List<InkStone>
 ){
-    val pagerCount = allInkStoneImages.size
+    val pagerCount = allInkStone.size
     val pagerState = rememberPagerState {
         pagerCount
     }
@@ -147,7 +168,7 @@ fun MainShowScreen(
             currentColor = allColors[currentPage]
             onPageChanged(currentPage)
 
-            InkStonePage(navController = navController, patternId = allPatterns[index], inkStoneId = allInkStoneImages[index])
+            InkStonePage(navController = navController, patternId = allPatterns[index], inkStoneId = allInkStone[index].imageId)
         }
 
         //底部指示器

@@ -9,19 +9,27 @@ import com.example.inkstonedemo1.model.Tile
 val allColors = listOf(
     Color(0xFFD6D5B7),
     Color(0xFFD1BA74),
-    Color(0xFFE6CEAC)
+    Color(0xFFE6CEAC),
+    Color(0xFFC7EDCC),
+    Color(0xFFd2d97a),
+    Color(0xFFf0d695),
+    Color(0xFFf8b37f),
+    Color(0xFFf7cfba),
+    Color(0xFFf8c387),
+    Color(0xFFf7e8aa)
 )
 
 val allPatterns = listOf(
     R.drawable.bg_main_pattern_1,
     R.drawable.bg_main_pattern_2,
-    R.drawable.bg_main_pattern_3
-)
-
-val allInkStoneImages = listOf(
-    R.drawable.inkstone_1,
-    R.drawable.inkstone_2,
-    R.drawable.inkstone_3
+    R.drawable.bg_main_pattern_3,
+    R.drawable.bg_main_pattern_1,
+    R.drawable.bg_main_pattern_2,
+    R.drawable.bg_main_pattern_3,
+    R.drawable.bg_main_pattern_1,
+    R.drawable.bg_main_pattern_2,
+    R.drawable.bg_main_pattern_3,
+    R.drawable.bg_main_pattern_1,
 )
 
 val allInkStoneClasses = listOf(

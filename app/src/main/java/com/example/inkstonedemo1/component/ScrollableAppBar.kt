@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.model.ARShowDestination
+import com.example.inkstonedemo1.model.ImageShowDestination
 import com.example.inkstonedemo1.view.navigateSingleTopTo
 import kotlin.math.roundToInt
 
@@ -43,6 +45,7 @@ fun ScrollableAppBar(
     navController : NavController,
     modifier: Modifier = Modifier,
     isCollected : Boolean ,
+    isARShow : Boolean,
     title: String = stringResource(id = R.string.app_name), //默认为应用名
     navigationIcon: @Composable () -> Unit =
         {
@@ -54,14 +57,15 @@ fun ScrollableAppBar(
                     },
                 imageVector = Icons.Filled.ArrowBack,
                 contentDescription = "ArrowBack",
-                tint = Color.White,
             )
         }, //默认为返回键
     @DrawableRes backgroundImageId: Int, // 背景图片
     color: Color,
     scrollableAppBarHeight: Dp,
     toolbarOffsetHeightPx: MutableState<Float>, //向上偏移量
-    onCollectedChanged : (Boolean) -> Unit
+    onCollectedChanged : (Boolean) -> Unit,
+    type : String,
+    dynasty : String
 ) {
 
     // 应用栏最大向上偏移量
@@ -75,17 +79,23 @@ fun ScrollableAppBar(
             IntOffset(x = 0, y = toolbarOffsetHeightPx.value.roundToInt()) //设置偏移量
         }
         .fillMaxWidth()
-        .background(color = color)
-        .clip(RoundedCornerShape(20.dp)),
+        .clip(RoundedCornerShape(20.dp))
+        .background(color = color),
     ) {
-        Image(
-            painter = painterResource(id = backgroundImageId),
-            contentDescription = "background",
-            modifier = modifier
-                .align(Alignment.Center)
-                .size(300.dp)
-                .padding(bottom = 30.dp),
-        )
+        Column(
+            modifier = Modifier.align(Alignment.Center)
+        ) {
+            
+            Text(text = "$dynasty/$type", fontSize = 22.sp)
+            
+            Image(
+                painter = painterResource(id = backgroundImageId),
+                contentDescription = "background",
+                modifier = modifier
+                    .size(300.dp)
+                    .padding(bottom = 30.dp),
+            )
+        }
 
         Row(
             modifier = modifier
@@ -102,11 +112,21 @@ fun ScrollableAppBar(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             //跳转AR展示画面
+            if (isARShow){
+                DraggableTab(
+                    modifier = Modifier.padding(top = 20.dp, bottom = 10.dp),
+                    imageId = R.drawable.ic_ar
+                ) {
+                    navController.navigateSingleTopTo(ARShowDestination.route)
+                }
+
+            }
+            //图片展示
             DraggableTab(
                 modifier = Modifier.padding(top = 20.dp, bottom = 10.dp),
-                imageId = R.drawable.ic_ar
+                imageId = R.drawable.ic_image
             ) {
-                navController.navigateSingleTopTo(ARShowDestination.route)
+                navController.navigateSingleTopTo(ImageShowDestination.route)
             }
 
             //收藏按钮
@@ -164,7 +184,6 @@ fun ScrollableAppBar(
             contentAlignment = Alignment.CenterStart
         ) {
             Text(text = title,
-                color = Color.White,
                 modifier = Modifier
                     .padding(start = 20.dp)
                     .matchParentSize(), // 使用 matchParentSize 修饰符保证不影响父 Box尺寸

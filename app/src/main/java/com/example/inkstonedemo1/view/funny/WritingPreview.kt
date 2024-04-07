@@ -7,12 +7,9 @@ import android.graphics.Paint
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -24,16 +21,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.paint
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.inkstonedemo1.R
@@ -54,13 +46,7 @@ fun WritingPreviewScreen(onBack: () -> Unit) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .paint(
-                    painter = painterResource(
-                        id = R.drawable.bg_writing_preview
-                    ),
-                    contentScale = ContentScale.FillBounds
-                ),
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             WritingPreview()
@@ -85,6 +71,7 @@ fun WritingPreview(
         )
     }
     val bgBitmap = BitmapFactory.decodeResource(LocalContext.current.resources,R.drawable.bg_writing_preview)
+    val newBgBitmap = Bitmap.createScaledBitmap(bgBitmap,itemSize.toInt(),(states.bitmapList.size * itemSize).toInt(),true)
     val newCanvas = remember { android.graphics.Canvas(bitmap) }
     val paint = remember { Paint() }
     val context = LocalContext.current
@@ -103,8 +90,7 @@ fun WritingPreview(
                 )
             }
     ) {
-
-        newCanvas.drawBitmap(bgBitmap,0f,0f,paint)
+        newCanvas.drawBitmap(newBgBitmap,0f,0f,paint)
         for (i in states.bitmapList.indices) {
             newCanvas.drawBitmap(states.bitmapList[i], 0f, itemSize * i, paint)
         }

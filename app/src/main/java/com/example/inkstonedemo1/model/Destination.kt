@@ -58,6 +58,12 @@ object MainInformationDestination : Destination {
     override val tabName: String = "主详细"
 }
 
+object ImageShowDestination : Destination{
+    override val route: String = "ImageShow"
+    override val icon: Int = R.drawable.ic_image
+    override val tabName: String = "图片展示"
+}
+
 //知识板块地址
 object HistoryKnowledgeDestination : Destination{
     override val route: String = "HistoryKnowledge"
