@@ -1,6 +1,5 @@
 package com.example.inkstonedemo1.view.user
 
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -11,11 +10,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -41,16 +38,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.inkstonedemo1.MyApplication
 import com.example.inkstonedemo1.R
-import com.example.inkstonedemo1.model.CraftsmanKnowledgeDestination
 import com.example.inkstonedemo1.model.EditUserDestination
 import com.example.inkstonedemo1.room.user.User
-import com.example.inkstonedemo1.utils.identifyPhoto
 import com.example.inkstonedemo1.utils.rotateIfRequired
 import com.example.inkstonedemo1.viewmodel.UserScreenViewModel
 import kotlinx.coroutines.delay

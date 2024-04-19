@@ -16,13 +16,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
@@ -36,7 +32,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -58,7 +53,6 @@ import com.example.inkstonedemo1.model.CollectedShowDestination
 import com.example.inkstonedemo1.model.DetailWritingShowDestination
 import com.example.inkstonedemo1.model.EditUserDestination
 import com.example.inkstonedemo1.model.WritingShowDestination
-import com.example.inkstonedemo1.model.uistate.UserScreenUiState
 import com.example.inkstonedemo1.model.userDestinations
 import com.example.inkstonedemo1.room.inkstone.InkStone
 import com.example.inkstonedemo1.ui.theme.main_surface_color

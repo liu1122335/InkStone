@@ -11,6 +11,6 @@ object BitmapUtils {
      */
     fun saveBitmapToGallery(context: Context, bmp: Bitmap?, bitName: String?): String {
         //插入到系统图库
-        return MediaStore.Images.Media.insertImage(context.contentResolver, bmp, "菜单", bitName)
+        return MediaStore.Images.Media.insertImage(context.contentResolver, bmp, "逢砚", bitName)
     }
 }

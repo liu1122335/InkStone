@@ -1,7 +1,6 @@
 package com.example.inkstonedemo1.view
 
 import android.graphics.Bitmap
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandIn
@@ -9,7 +8,6 @@ import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -48,7 +46,6 @@ import com.example.inkstonedemo1.model.VisitTilesDestination
 import com.example.inkstonedemo1.model.WritingDestination
 import com.example.inkstonedemo1.model.uistate.UserScreenUiState
 import com.example.inkstonedemo1.room.inkstone.InkStone
-import com.example.inkstonedemo1.room.user.User
 import com.example.inkstonedemo1.view.detail.DetailInformationScreen
 import com.example.inkstonedemo1.view.funny.FunnyScreen
 import com.example.inkstonedemo1.view.funny.VisitTilesScreen

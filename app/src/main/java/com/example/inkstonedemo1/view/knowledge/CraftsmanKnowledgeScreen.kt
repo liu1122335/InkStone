@@ -23,7 +23,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -47,13 +46,11 @@ import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.inkstonedemo1.ui.theme.md_theme_light_primaryContainer
 import com.example.inkstonedemo1.R
-import com.example.inkstonedemo1.component.DraggableTab
 import com.example.inkstonedemo1.data.allCraftsmanKnowledge
 import com.example.inkstonedemo1.model.CraftsmanKnowledgeDestination
 import com.example.inkstonedemo1.model.knowledge.Craftsman

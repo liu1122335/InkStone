@@ -41,7 +41,6 @@ import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.ui.theme.md_theme_light_surfaceVariant
 import com.example.inkstonedemo1.data.allAppreciateKnowledge
 import com.example.inkstonedemo1.model.AppreciateKnowledgeDestination
-import com.example.inkstonedemo1.model.CraftsmanKnowledgeDestination
 import com.example.inkstonedemo1.model.knowledge.AppreciateKnowledge
 
 @OptIn(ExperimentalMaterial3Api::class)

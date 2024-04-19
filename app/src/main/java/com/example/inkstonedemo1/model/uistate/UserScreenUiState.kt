@@ -2,7 +2,6 @@ package com.example.inkstonedemo1.model.uistate
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.compose.ui.platform.LocalContext
 import com.example.inkstonedemo1.MyApplication
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.room.user.User

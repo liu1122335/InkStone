@@ -1,10 +1,5 @@
 package com.example.inkstonedemo1.model
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import com.example.inkstonedemo1.R
 
 interface Destination {
@@ -71,11 +66,6 @@ object ImageShowDestination : Destination{
 }
 
 //知识板块地址
-object MainKnowledgeDestination : Destination{
-    override val route: String ="MainKnowledge"
-    override val icon: Int = R.drawable.ic_home
-    override val tabName: String = "主页"
-}
 object HistoryKnowledgeDestination : Destination{
     override val route: String = "HistoryKnowledge"
     override val icon: Int = R.drawable.ic_history
@@ -121,11 +111,6 @@ object FunnyDestination : Destination{
     override val route: String = "Funny"
     override val icon: Int = R.drawable.ic_funny
     override val tabName: String = "趣玩"
-}
-object MainFunnyDestination : Destination{
-    override val route: String = "MainFunny"
-    override val icon: Int = R.drawable.ic_funny
-    override val tabName: String = "趣玩主界面"
 }
 object VisitTilesDestination : Destination{
     override val route: String = "VisitTiles"

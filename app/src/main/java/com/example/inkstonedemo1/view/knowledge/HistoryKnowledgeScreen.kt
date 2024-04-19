@@ -43,7 +43,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.ui.theme.md_theme_light_surfaceVariant
 import com.example.inkstonedemo1.data.allHistoryKnowledge
-import com.example.inkstonedemo1.model.CraftsmanKnowledgeDestination
 import com.example.inkstonedemo1.model.HistoryDetailDestination
 import com.example.inkstonedemo1.model.knowledge.HistoryKnowledge
 import com.example.inkstonedemo1.model.MainHistoryKnowledgeDestination

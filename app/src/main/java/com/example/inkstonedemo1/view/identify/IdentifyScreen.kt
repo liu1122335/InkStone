@@ -22,11 +22,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import com.example.inkstonedemo1.ui.theme.identify_result_bg_color
 import com.example.inkstonedemo1.R
-import com.example.inkstonedemo1.component.VerticalText
 import com.example.inkstonedemo1.utils.identifyPhoto
 import com.example.inkstonedemo1.utils.rotateIfRequired
 import kotlinx.coroutines.delay

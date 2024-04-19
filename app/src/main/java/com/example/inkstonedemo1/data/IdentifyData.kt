@@ -2,7 +2,6 @@ package com.example.inkstonedemo1.data
 
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.model.InkStoneTypeKnowledge
-import com.example.inkstonedemo1.room.inkstone.InkStone
 
 val allIdentifyData = listOf(
     InkStoneTypeKnowledge(

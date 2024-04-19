@@ -10,8 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.navigation.NavController
-import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.component.AppToolsBar
 
 @Composable
