@@ -31,7 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.compose.md_theme_light_tertiaryContainer
+import com.example.inkstonedemo1.ui.theme.md_theme_light_tertiaryContainer
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.component.AppToolsBar
 import com.example.inkstonedemo1.utils.WritingBoardConfig.ITEM_SIZE

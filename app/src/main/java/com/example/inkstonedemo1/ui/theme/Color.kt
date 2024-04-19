@@ -1,4 +1,4 @@
-package com.example.compose
+package com.example.inkstonedemo1.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val md_theme_light_primary = Color(0xFF835500)
@@ -65,3 +65,4 @@ val md_theme_dark_scrim = Color(0xFF000000)
 
 val dark_golden = Color(0xFFCFB53B)
 val identify_result_bg_color = Color(0xFF5D3131)
+val main_surface_color = Color(0xFFF2EAE5)

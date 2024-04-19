@@ -1,6 +1,7 @@
 
 package com.example.inkstonedemo1.view.detail
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.inkstonedemo1.R
 import com.google.android.filament.Engine
 import com.google.ar.core.Anchor
@@ -52,8 +54,9 @@ private const val kMaxModelInstances = 10
 
 @Composable
 fun ARShowScreen(
-    modifier : Modifier = Modifier.fillMaxSize(),
-    arFilePath : String = "3Dmodels/fish.glb"
+    modifier : Modifier = Modifier,
+    arFilePath : String = "3Dmodels/fish.glb",
+    navController: NavController
 ){
     Box (
         modifier = modifier
@@ -156,6 +159,9 @@ fun ARShowScreen(
                 stringResource(id = R.string.tap_anywhere_to_add_model)
             }
         )
+    }
+    BackHandler {
+        navController.popBackStack()
     }
 }
 

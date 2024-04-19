@@ -2,4 +2,5 @@
     <string name="app_name">逢砚</string>
     <string name="point_your_phone_down">请将您的手机向下</string>
     <string name="tap_anywhere_to_add_model">请点击任意位置以加载模型</string>
+    <string name="title_activity_knowledge_detail">KnowledgeDetailActivity</string>
 </resources>

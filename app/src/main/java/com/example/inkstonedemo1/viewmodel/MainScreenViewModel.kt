@@ -1,18 +1,15 @@
 package com.example.inkstonedemo1.viewmodel
 
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.inkstonedemo1.MyApplication
 import com.example.inkstonedemo1.model.uistate.MainScreenUiState
-import com.example.inkstonedemo1.room.InkStone
-import com.example.inkstonedemo1.room.InkStoneDatabase
-import dev.romainguy.kotlin.math.all
+import com.example.inkstonedemo1.room.inkstone.InkStone
+import com.example.inkstonedemo1.room.inkstone.InkStoneDatabase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -25,28 +22,36 @@ class MainScreenViewModel : ViewModel() {
 
     val allInkStone : Flow<List<InkStone>> =inkStoneDao.getAllInkStone()
     val allCollectedInkStone : Flow<List<InkStone>> = inkStoneDao.getCollectedInkStone()
-
-    fun getRelevancyList(type : String) : Flow<List<InkStone>>{
-        return inkStoneDao.getAllRelevancyInkStone(type)
-    }
+    val allARInkStone : Flow<List<InkStone>> = inkStoneDao.getARInkStone()
 
     fun insertInkStone(inkStone: InkStone){
         viewModelScope.launch {
-            inkStoneDao.insertInkStone(inkStone)
+            inkStone.id = inkStoneDao.insertInkStone(inkStone)
         }
     }
 
-    fun updateInkStone(inkStone: InkStone){
+    private fun updateInkStone(inkStone: InkStone){
         viewModelScope.launch {
             inkStoneDao.updateInkStone(inkStone)
         }
     }
 
-    fun updateCurrentPageId(currentId : Int){
-        _uiState.update {currentState ->
-            currentState.copy(
-                currentInkStoneId = currentId
+    fun updateInkStoneIsCollected(isCollected : Boolean){
+        _uiState.update { currentUiState ->
+            currentUiState.copy(
+                inkStone = currentUiState.inkStone.copy(isCollected = isCollected)
             )
         }
+        updateInkStone(inkStone = _uiState.value.inkStone)
+    }
+
+    fun updateCurrentUiState(inkStone: InkStone){
+        _uiState.update {currentUiState ->
+            currentUiState.copy(inkStone = inkStone)
+        }
+    }
+
+    fun getAllRelevancyInkStone(type : String , id: Long): Flow<List<InkStone>>{
+        return inkStoneDao.getAllRelevancyInkStone(type = type,id = id)
     }
 }

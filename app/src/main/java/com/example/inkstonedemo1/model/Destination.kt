@@ -14,12 +14,6 @@ interface Destination {
 }
 
 //主界面板块地址
-object MainShowDestination : Destination{
-    override val route: String ="MainShow"
-    override val icon: Int = R.drawable.ic_home
-    override val tabName: String = "主页"
-}
-
 object KnowledgeDestination : Destination{
     override val route: String = "Knowledge"
     override val icon: Int = R.drawable.ic_knowledge
@@ -37,6 +31,18 @@ object UserDestination : Destination{
     override val icon: Int = R.drawable.ic_user
     override val tabName: String = "用户"
 
+}
+
+object EditUserDestination : Destination{
+    override val route: String = "EditUser"
+    override val icon: Int = R.drawable.ic_user
+    override val tabName: String = "用户编辑"
+}
+
+object AllAppDestination : Destination{
+    override val route: String = "AllApp"
+    override val icon: Int = R.drawable.ic_all_ink_stone_list
+    override val tabName: String = "全部"
 }
 
 //详细信息板块地址
@@ -65,6 +71,11 @@ object ImageShowDestination : Destination{
 }
 
 //知识板块地址
+object MainKnowledgeDestination : Destination{
+    override val route: String ="MainKnowledge"
+    override val icon: Int = R.drawable.ic_home
+    override val tabName: String = "主页"
+}
 object HistoryKnowledgeDestination : Destination{
     override val route: String = "HistoryKnowledge"
     override val icon: Int = R.drawable.ic_history
@@ -79,15 +90,32 @@ object MainHistoryKnowledgeDestination : Destination{
 object HistoryDetailDestination : Destination{
     override val route: String = "HistoryDetail"
     override val icon: Int = R.drawable.ic_history
-    override val tabName: String = "详细历史"
+    override val tabName: String = "历史"
 
 }
 object AppreciateKnowledgeDestination : Destination{
     override val route: String = "AppreciateKnowledge"
     override val icon: Int = R.drawable.ic_appreciate
-    override val tabName: String = "鉴赏知识"
+    override val tabName: String = "工艺"
 }
 
+object CraftsmanKnowledgeDestination : Destination{
+    override val route: String = "CraftsmanKnowledge"
+    override val icon: Int = R.drawable.ic_craftsman
+    override val tabName: String = "匠人"
+}
+
+object AllInkStoneListDestination : Destination{
+    override val route: String = "AllInkStoneList"
+    override val icon: Int = R.drawable.ic_all_ink_stone_list
+    override val tabName: String = "名砚"
+}
+
+object MainAllInkStoneListDestination : Destination{
+    override val route: String = "MainAllInkStoneList"
+    override val icon: Int = R.drawable.ic_all_ink_stone_list
+    override val tabName: String = "名砚主界面"
+}
 //趣玩板块地址
 object FunnyDestination : Destination{
     override val route: String = "Funny"
@@ -120,10 +148,30 @@ object WritingDestination : Destination{
     override val icon: Int = R.drawable.ic_writing
     override val tabName: String = "临池而书"
 }
+object CollectedShowDestination : Destination{
+    override val route: String = "CollectedShow"
+    override val icon: Int = R.drawable.ic_collected
+    override val tabName: String = "收藏展示"
+}
+object WritingShowDestination : Destination{
+    override val route: String = "WritingShow"
+    override val icon: Int = R.drawable.ic_writing
+    override val tabName: String = "墨宝展示"
+}
 
+object DetailWritingShowDestination : Destination{
+    override val route: String = "DetailWritingShow"
+    override val icon: Int = R.drawable.ic_writing
+    override val tabName: String = "墨宝详细展示"
+}
 
+val userDestinations = listOf(
+    CollectedShowDestination,
+    WritingShowDestination
+)
 
-val knowledgeDestinations = listOf(
-    HistoryKnowledgeDestination,
-    AppreciateKnowledgeDestination,
+val MainMenuDestinations = listOf(
+    KnowledgeDestination,
+    FunnyDestination,
+    UserDestination
 )

@@ -1,5 +1,6 @@
 package com.example.inkstonedemo1.view.detail
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavController
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.component.AppToolsBar
 
@@ -16,7 +18,7 @@ import com.example.inkstonedemo1.component.AppToolsBar
 fun ImageShowScreen(
     imageId : Int,
     inkStoneName : String,
-    onBack : () -> Unit
+    onBack : () -> Unit,
 ){
     Column {
         AppToolsBar(
@@ -34,5 +36,8 @@ fun ImageShowScreen(
                 contentScale = ContentScale.FillWidth
             )
         }
+    }
+    BackHandler {
+        onBack()
     }
 }

@@ -1,7 +1,7 @@
 package com.example.inkstonedemo1.data
 
 import com.example.inkstonedemo1.R
-import com.example.inkstonedemo1.room.InkStone
+import com.example.inkstonedemo1.room.inkstone.InkStone
 
 val InitInkStoneData = listOf(
 
@@ -30,7 +30,7 @@ val InitInkStoneData = listOf(
         inkStoneType = "端砚",
         inkStoneHeight = "高：3.9厘米",
         inkStoneLength = "长：13.5厘米",
-        inkStoneWidth = "长：7.7厘米",
+        inkStoneWidth = "宽：7.7厘米",
         isCollected = false,
         isARShow = true,
         imageId = R.drawable.ink_stone_img_2,
@@ -73,7 +73,7 @@ val InitInkStoneData = listOf(
                 "此砚砚体宽大，古朴厚重，制作精良。\n" +
                 "歙砚雕刻具有徽派石雕的风格，即浑厚朴实，美观大方，刀法刚健，花式多变。它的图案，多取于黄山胜境、新安风光、小桥流水或神话传说、名人逸事等。",
         inkStoneType = "歙砚",
-        inkStoneHeight = "厚：6.5厘米",
+        inkStoneHeight = "高：6.5厘米",
         inkStoneLength = "长：32.5厘米",
         inkStoneWidth = "宽：32.5厘米",
         isARShow = false,
@@ -106,7 +106,7 @@ val InitInkStoneData = listOf(
                 "此砚造型新颖，雕塑山峰奇特，并以简练的线条刻画而成，颇显雄伟生动。\n" +
                 "唐代陶砚的砚足讲究变化，流行双足，多置后矮足，呈圆柱状，或梯形足等，形式各异，成为唐代特有的砚石特征。 陶砚装饰特点，以自然质朴为美，多光素无纹饰，突出点线面立体造型，美观大方，独有唐代风韵。",
         inkStoneType = "陶砚",
-        inkStoneHeight = "通高：17.9厘米",
+        inkStoneHeight = "高：17.9厘米",
         inkStoneLength = "长：18.5厘米",
         inkStoneWidth = "宽：21.5厘米",
         isCollected = false,
@@ -134,7 +134,7 @@ val InitInkStoneData = listOf(
         inkStoneDescription = "砚为澄泥烧制而成。砚面为长方形砚堂，受墨处平滑，首端深凹作小方池。其四周环曲水，边框内饰“S”纹。砚侧四面雕饰螭纹，四角有兽面形足。砚背面深凹，底内浅刻“申国公研”四字。\n" +
                 "此砚造型古朴，整体小巧，色泽橙红，犹如古铜，表面有剥蚀。为仿古澄泥砚形式，明清时期多有仿制品。澄泥砚用特种胶泥加工烧制而成因烧过程及时间不同，可以是多种颜色，有的一砚多色，尤其讲究雕刻技术，有浮雕、半起胎、立体、过通等品种。",
         inkStoneType = "澄泥砚",
-        inkStoneHeight = "通高：4.3厘米",
+        inkStoneHeight = "高：4.3厘米",
         inkStoneLength = "长：11.3厘米",
         inkStoneWidth = "宽：6.8厘米",
         isCollected = false,
@@ -209,7 +209,7 @@ val InitInkStoneData = listOf(
         inkStoneDescription = "清宫旧藏，砚为端石质，长方形。砚面雕椭圆形砚堂，深凹处为半月形砚池，其外深浅雕饰水榭、蟾蜍纹、云纹、叶纹水池等。砚侧分别雕饰海马、鱼、象、牛四种动物纹。砚背面深凹，自然出四边框，其内浅雕蕉叶纹。\n" +
                 "此砚胎体厚重，石质较粗，雕工简练，为宋代石砚特点。",
         inkStoneType = "端砚",
-        inkStoneHeight = "厚：6.5厘米",
+        inkStoneHeight = "高：6.5厘米",
         inkStoneLength = "长：19.8厘米",
         inkStoneWidth = "宽：12厘米",
         isCollected = false,
@@ -365,7 +365,7 @@ val InitInkStoneData = listOf(
                 "古代的瓷砚，远没有石砚和澄泥砚发墨好，但在古代交通和信息不发达的时期，人们只有就地取材制作砚台。因此，在一些陶瓷产地，就出现了瓷砚。",
         inkStoneType = "瓷砚",
         inkStoneHeight = "高：1.8厘米",
-        inkStoneLength = "长9.5",
+        inkStoneLength = "长：9.5",
         inkStoneWidth = "宽：5.5厘米",
         isARShow = false,
         isCollected = false,
@@ -395,7 +395,7 @@ val InitInkStoneData = listOf(
         inkStoneType = "歙砚",
         inkStoneHeight = "高：2厘米",
         inkStoneLength = "长：16.3厘米",
-        inkStoneWidth = "宽14.5厘米",
+        inkStoneWidth = "宽：14.5厘米",
         isARShow = false,
         isCollected = false,
         imageId = R.drawable.ink_stone_img_27,

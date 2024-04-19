@@ -1,5 +1,6 @@
 package com.example.inkstonedemo1.component
 
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,16 +15,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -33,31 +38,33 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.inkstonedemo1.ui.theme.md_theme_light_primary
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.model.ARShowDestination
 import com.example.inkstonedemo1.model.ImageShowDestination
+import com.example.inkstonedemo1.ui.theme.main_surface_color
 import com.example.inkstonedemo1.view.navigateSingleTopTo
 import kotlin.math.roundToInt
 
 @Composable
 fun ScrollableAppBar(
-    mainNavController: NavController,
+    onBackButtonClicked : () -> Unit,
     navController : NavController,
     modifier: Modifier = Modifier,
-    isCollected : Boolean ,
     isARShow : Boolean,
+    isCollected : Boolean,
+    onSpeakClicked : () -> Unit,
     title: String = stringResource(id = R.string.app_name), //默认为应用名
     navigationIcon: @Composable () -> Unit =
         {
-            Icon(
-                modifier = modifier
-                    .fillMaxSize()
-                    .clickable {
-                        mainNavController.popBackStack()
-                    },
-                imageVector = Icons.Filled.ArrowBack,
-                contentDescription = "ArrowBack",
-            )
+            IconButton(
+                onClick = onBackButtonClicked,
+            ){
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "ArrowBack",
+                )
+            }
         }, //默认为返回键
     @DrawableRes backgroundImageId: Int, // 背景图片
     color: Color,
@@ -79,9 +86,19 @@ fun ScrollableAppBar(
             IntOffset(x = 0, y = toolbarOffsetHeightPx.value.roundToInt()) //设置偏移量
         }
         .fillMaxWidth()
-        .clip(RoundedCornerShape(20.dp))
         .background(color = color),
     ) {
+        Box(
+            modifier = Modifier.fillMaxSize()
+                .background(
+                    brush = Brush.verticalGradient(
+                        colorStops = arrayOf(
+                            Pair(0.4f, Color.Transparent),
+                            Pair(1f, main_surface_color)
+                        )
+                    )
+                )
+        )
         Column(
             modifier = Modifier.align(Alignment.Center)
         ) {
@@ -96,7 +113,6 @@ fun ScrollableAppBar(
                     .padding(bottom = 30.dp),
             )
         }
-
         Row(
             modifier = modifier
                 .fillMaxWidth()
@@ -114,7 +130,7 @@ fun ScrollableAppBar(
             //跳转AR展示画面
             if (isARShow){
                 DraggableTab(
-                    modifier = Modifier.padding(top = 20.dp, bottom = 10.dp),
+                    modifier = Modifier.padding(top = 20.dp, bottom = 10.dp).size(55.dp),
                     imageId = R.drawable.ic_ar
                 ) {
                     navController.navigateSingleTopTo(ARShowDestination.route)
@@ -123,7 +139,7 @@ fun ScrollableAppBar(
             }
             //图片展示
             DraggableTab(
-                modifier = Modifier.padding(top = 20.dp, bottom = 10.dp),
+                modifier = Modifier.padding(top = 20.dp, bottom = 10.dp).size(55.dp),
                 imageId = R.drawable.ic_image
             ) {
                 navController.navigateSingleTopTo(ImageShowDestination.route)
@@ -131,7 +147,7 @@ fun ScrollableAppBar(
 
             //收藏按钮
             DraggableTab(
-                modifier = Modifier.padding(top = 20.dp, bottom = 10.dp),
+                modifier = Modifier.padding(top = 20.dp, bottom = 10.dp).size(55.dp),
                 imageId = if (isCollected) R.drawable.ic_collected else R.drawable.ic_uncollected
             ) {
                 onCollectedChanged(!isCollected)
@@ -139,13 +155,13 @@ fun ScrollableAppBar(
 
             //朗读功能
             DraggableTab(
-                modifier = Modifier.padding(top = 20.dp, bottom = 10.dp),
+                modifier = Modifier.padding(top = 20.dp, bottom = 10.dp).size(55.dp),
                 imageId = R.drawable.ic_text_to_speech
             ) {
-
+                onSpeakClicked()
             }
         }
-        
+
         // 自定义应用栏
         Row(
             modifier = modifier
@@ -174,7 +190,7 @@ fun ScrollableAppBar(
                 .height(toolBarHeight) //和ToolBar同高
                 .fillMaxWidth()
                 .align(Alignment.BottomStart)
-                .padding(top = 30.dp)
+                .padding(top = 35.dp)
                 .offset {
                     IntOffset(
                         x = -((toolbarOffsetHeightPx.value / maxOffsetHeightPx) * titleOffsetWidthReferenceValue).roundToInt(),
@@ -194,6 +210,6 @@ fun ScrollableAppBar(
 }
 
 // 应用栏高度
-private val toolBarHeight = 56.dp
+private val toolBarHeight = 60.dp
 // 导航图标大小
 private val navigationIconSize = 56.dp

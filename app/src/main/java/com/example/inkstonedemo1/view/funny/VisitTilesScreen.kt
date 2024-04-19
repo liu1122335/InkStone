@@ -26,8 +26,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.windowInsetsStartWidth
-import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.pager.VerticalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
@@ -53,8 +51,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.compose.md_theme_light_onTertiaryContainer
-import com.example.compose.md_theme_light_tertiaryContainer
+import com.example.inkstonedemo1.ui.theme.md_theme_light_onTertiaryContainer
+import com.example.inkstonedemo1.ui.theme.md_theme_light_tertiaryContainer
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.data.allTiles
 import com.example.inkstonedemo1.model.MainVisitDestination

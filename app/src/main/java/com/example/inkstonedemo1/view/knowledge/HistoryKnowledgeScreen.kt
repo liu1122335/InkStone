@@ -6,6 +6,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,11 +15,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -33,33 +40,62 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.compose.md_theme_light_surfaceVariant
+import com.example.inkstonedemo1.R
+import com.example.inkstonedemo1.ui.theme.md_theme_light_surfaceVariant
 import com.example.inkstonedemo1.data.allHistoryKnowledge
+import com.example.inkstonedemo1.model.CraftsmanKnowledgeDestination
 import com.example.inkstonedemo1.model.HistoryDetailDestination
 import com.example.inkstonedemo1.model.knowledge.HistoryKnowledge
 import com.example.inkstonedemo1.model.MainHistoryKnowledgeDestination
 import com.example.inkstonedemo1.view.navigateSingleTopTo
 import com.example.inkstonedemo1.viewmodel.HistoryKnowledgeScreenViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HistoryKnowledgeScreen(
-    historyKnowledgeScreenViewModel: HistoryKnowledgeScreenViewModel = viewModel()
+    historyKnowledgeScreenViewModel: HistoryKnowledgeScreenViewModel = viewModel(),
+    onBackButtonClicked: () -> Unit
 ){
     val navController = rememberNavController()
     val historyKnowledgeScreenUiState by historyKnowledgeScreenViewModel.uiState.collectAsState()
-
-    NavHost(
-        navController = navController,
-        startDestination = MainHistoryKnowledgeDestination.route,
-    ){
-        composable(route = MainHistoryKnowledgeDestination.route){
-            MainHistoryKnowledgeScreen(onClick = { it ->
-                historyKnowledgeScreenViewModel.updateCurrentHistoryId(it)
-                navController.navigateSingleTopTo(HistoryDetailDestination.route)
-            })
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = HistoryDetailDestination.tabName)
+                },
+                navigationIcon = {
+                    IconButton(
+                        onClick = onBackButtonClicked
+                    ){
+                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "")
+                    }
+                },
+                actions = {
+                    Icon(
+                        painterResource(id = HistoryDetailDestination.icon),
+                        modifier = Modifier.fillMaxHeight().padding(end = 20.dp),
+                        contentDescription = ""
+                    )
+                }
+            )
         }
-        composable(route = HistoryDetailDestination.route){
-            HistoryDetailScreen(historyKnowledge = allHistoryKnowledge[historyKnowledgeScreenUiState.currentHistoryId])
+    ){innerPadding ->
+        NavHost(
+            modifier = Modifier.fillMaxSize().padding(innerPadding)
+                .paint(painter = painterResource(id = R.drawable.bg_element_knowledge_screen)),
+            navController = navController,
+            startDestination = MainHistoryKnowledgeDestination.route,
+        ){
+            composable(route = MainHistoryKnowledgeDestination.route){
+                MainHistoryKnowledgeScreen(onClick = { it ->
+                    historyKnowledgeScreenViewModel.updateCurrentHistoryId(it)
+                    navController.navigateSingleTopTo(HistoryDetailDestination.route)
+                })
+            }
+            composable(route = HistoryDetailDestination.route){
+                HistoryDetailScreen(historyKnowledge = allHistoryKnowledge[historyKnowledgeScreenUiState.currentHistoryId])
+            }
         }
     }
 }
@@ -97,9 +133,10 @@ fun HistoryKnowledgeCard(
                     onClick(index)
                 }
             ),
-        colors = CardDefaults.cardColors(containerColor = md_theme_light_surfaceVariant.copy(alpha = 0.60f)),
+        colors = CardDefaults.cardColors(containerColor = md_theme_light_surfaceVariant),
         shape = RoundedCornerShape(15.dp),
-        ) {
+        elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()

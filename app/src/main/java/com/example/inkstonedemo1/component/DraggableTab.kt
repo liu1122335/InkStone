@@ -32,7 +32,6 @@ fun DraggableTab(
     FloatingActionButton(
         onClick = onClick,
         modifier = modifier
-            .size(55.dp)
             .offset {
                 IntOffset(offset.x.roundToInt(), offset.y.roundToInt())
             }

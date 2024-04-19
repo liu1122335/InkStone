@@ -41,7 +41,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
-import com.example.compose.dark_golden
+import com.example.inkstonedemo1.ui.theme.dark_golden
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.utils.getCameraProvider
 import com.example.inkstonedemo1.utils.startTakePhoto
@@ -157,13 +157,13 @@ fun PreviewView(
             val flashImage by animateIntAsState(targetValue = nextImage)
 
             val galleryLauncher = rememberLauncherForActivityResult(
-                contract = ActivityResultContracts.GetContent(),
-                onResult = { uri ->
-                    uri?.let {
-                        selectPhotoIdentify(uri)
-                    }
+            contract = ActivityResultContracts.GetContent(),
+            onResult = { uri ->
+                uri?.let {
+                    selectPhotoIdentify(uri)
                 }
-            )
+            }
+        )
 
             //从相册中选择图片
             Image(painter = painterResource(id = R.drawable.ic_album), contentDescription = "",modifier = Modifier.clickable{
