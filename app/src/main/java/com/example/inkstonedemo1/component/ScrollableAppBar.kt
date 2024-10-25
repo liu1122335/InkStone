@@ -27,6 +27,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -96,7 +98,7 @@ fun ScrollableAppBar(
             modifier = Modifier.align(Alignment.Center)
         ) {
             
-            Text(text = "$dynasty/$type", fontSize = 22.sp)
+            Text(text = "$dynasty/$type", fontSize = 22.sp, fontFamily = FontFamily(Font(R.font.font_1)))
             
             Image(
                 painter = painterResource(id = backgroundImageId),
@@ -196,7 +198,8 @@ fun ScrollableAppBar(
                 modifier = Modifier
                     .padding(start = 20.dp)
                     .matchParentSize(), // 使用 matchParentSize 修饰符保证不影响父 Box尺寸
-                fontSize = 20.sp
+                fontSize = 20.sp,
+                fontFamily = FontFamily(Font(R.font.font_1))
             )
         }
     }

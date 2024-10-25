@@ -28,6 +28,8 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
@@ -41,14 +43,13 @@ import com.example.inkstonedemo1.model.MainAllInkStoneListDestination
 import com.example.inkstonedemo1.room.inkstone.InkStone
 import com.example.inkstonedemo1.view.detail.DetailInformationScreen
 import com.example.inkstonedemo1.view.navigateTopTopTo
-import com.example.inkstonedemo1.viewmodel.MainScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.MainScreenViewModel
 
 @Composable
 fun AllInkStoneListScreen(
     onBackButtonClicked : () -> Unit,
     allInkStoneList : List<InkStone>,
-    mainScreenViewModel: MainScreenViewModel,
-){
+    mainScreenViewModel: MainScreenViewModel, ){
     Box(
         modifier = Modifier.fillMaxSize()
     ){
@@ -63,8 +64,7 @@ fun AllInkStoneListScreen(
                         allInkStoneList = allInkStoneList,
                         onInkStoneClicked = {
                             mainScreenViewModel.updateCurrentUiState(inkStone = it)
-                            navController.navigateTopTopTo(DetailInformationDestination.route)
-                        },
+                            navController.navigateTopTopTo(DetailInformationDestination.route) },
                         onBackButtonClicked = onBackButtonClicked
                     )
                 }
@@ -95,15 +95,13 @@ fun MainAllInkStoneListScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = AllInkStoneListDestination.tabName)
-                },
+                    Text(text = AllInkStoneListDestination.tabName,fontFamily = FontFamily(Font(R.font.font_1))) },
                 navigationIcon = {
                     IconButton(
                         onClick = onBackButtonClicked
                     ){
                         Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "")
-                    }
-                },
+                    } },
                 actions = {
                     Icon(
                         painterResource(id = AllInkStoneListDestination.icon),
@@ -129,9 +127,7 @@ fun MainAllInkStoneListScreen(
                     Card(
                         modifier = Modifier.clickable(
                             onClick = {
-                                onInkStoneClicked(it)
-                            },
-                        ),
+                                onInkStoneClicked(it) },),
                         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
                     ) {
                         Image(
@@ -145,11 +141,13 @@ fun MainAllInkStoneListScreen(
                         ){
                             Text(
                                 text = it.inkStoneName,
-                                fontSize = 18.sp
+                                fontSize = 18.sp,
+                                fontFamily = FontFamily(Font(R.font.font_1))
                             )
                             Text(
                                 text = it.inkStoneDynasty + "/" + it.inkStoneType,
-                                color = Color.Black.copy(alpha = 0.6f)
+                                color = Color.Black.copy(alpha = 0.6f),
+                                fontFamily = FontFamily(Font(R.font.font_1))
                             )
                         }
                     }

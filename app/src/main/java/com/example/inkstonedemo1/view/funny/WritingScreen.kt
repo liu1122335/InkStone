@@ -28,6 +28,8 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -35,9 +37,9 @@ import com.example.inkstonedemo1.ui.theme.md_theme_light_tertiaryContainer
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.component.AppToolsBar
 import com.example.inkstonedemo1.utils.WritingBoardConfig.ITEM_SIZE
-import com.example.inkstonedemo1.viewmodel.WriteScreenViewModel
-import com.example.inkstonedemo1.viewmodel.WritingBoardViewAction
-import com.example.inkstonedemo1.viewmodel.WritingBoardViewStates
+import com.example.inkstonedemo1.intent.viewmodel.WriteScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.WritingBoardViewAction
+import com.example.inkstonedemo1.intent.viewmodel.WritingBoardViewStates
 
 @ExperimentalComposeUiApi
 @Composable
@@ -110,7 +112,7 @@ fun ConfirmBtn(
             .height(50.dp),
         colors = ButtonDefaults.buttonColors(containerColor = md_theme_light_tertiaryContainer)
     ) {
-        Text(text = "生成墨宝", color = Color.Black)
+        Text(text = "生成墨宝", color = Color.Black,fontFamily = FontFamily(Font(R.font.font_1)))
     }
 }
 

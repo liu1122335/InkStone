@@ -49,6 +49,8 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
 
 }
 
@@ -67,21 +69,26 @@ dependencies {
     implementation("androidx.compose.material:material:1.6.0")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.0-alpha")
     implementation("com.google.accompanist:accompanist-permissions:0.23.1")
-    implementation("io.coil-kt:coil-compose:2.6.0")
-    implementation("io.coil-kt:coil-gif:2.6.0")
+
+    implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation("io.coil-kt:coil-gif:2.7.0")
+
     implementation("org.tensorflow:tensorflow-lite:2.15.0")
     implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
     implementation("org.tensorflow:tensorflow-lite-metadata:0.4.4")
+    implementation("org.tensorflow:tensorflow-lite-gpu:2.3.0")
+
     implementation("androidx.camera:camera-camera2:1.3.1")
     implementation("androidx.camera:camera-lifecycle:1.3.1")
     implementation("androidx.camera:camera-view:1.3.1")
     implementation("androidx.camera:camera-extensions:1.3.1")
-    implementation("org.tensorflow:tensorflow-lite-gpu:2.3.0")
+
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("com.google.vr:sdk-panowidget:1.80.0")
     implementation("com.google.vr:sdk-videowidget:1.80.0")
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
+    implementation("com.google.mlkit:text-recognition-chinese:16.0.0")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     kapt("androidx.room:room-compiler:2.6.1")

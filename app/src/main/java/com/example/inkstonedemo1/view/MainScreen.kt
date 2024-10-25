@@ -60,15 +60,15 @@ import com.example.inkstonedemo1.view.knowledge.KnowledgeScreen
 import com.example.inkstonedemo1.view.user.DetailWritingShowScreen
 import com.example.inkstonedemo1.view.user.EditUserScreen
 import com.example.inkstonedemo1.view.user.UserScreen
-import com.example.inkstonedemo1.viewmodel.DetailWritingShowScreenViewModel
-import com.example.inkstonedemo1.viewmodel.MainScreenViewModel
-import com.example.inkstonedemo1.viewmodel.UserScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.DetailWritingShowScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.MainScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.UserScreenViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun MainScreen(
     mainScreenViewModel: MainScreenViewModel = viewModel(),
-    userScreenViewModel: UserScreenViewModel= viewModel(),
+    userScreenViewModel: UserScreenViewModel = viewModel(),
     detailWritingShowScreenViewModel: DetailWritingShowScreenViewModel = viewModel(),
 ){
     val allInkStone by mainScreenViewModel.allInkStone.collectAsState(initial = InitInkStoneData)

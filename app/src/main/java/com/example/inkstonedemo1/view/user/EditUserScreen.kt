@@ -39,6 +39,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.inkstonedemo1.MyApplication
@@ -46,7 +48,7 @@ import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.model.EditUserDestination
 import com.example.inkstonedemo1.room.user.User
 import com.example.inkstonedemo1.utils.rotateIfRequired
-import com.example.inkstonedemo1.viewmodel.UserScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.UserScreenViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -107,7 +109,7 @@ fun EditUserScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = EditUserDestination.tabName)
+                    Text(text = EditUserDestination.tabName,fontFamily = FontFamily(Font(R.font.font_1)))
                 },
                 navigationIcon = {
                     IconButton(
@@ -174,7 +176,7 @@ fun EditUserScreen(
                             modifier = Modifier.padding(top = 10.dp),
                             onClick = { galleryLauncher1.launch("image/*") }
                         ){
-                            Text(text = "更换背景图片")
+                            Text(text = "更换背景图片",fontFamily = FontFamily(Font(R.font.font_1)))
                         }
                     }
                     //改头像
@@ -192,7 +194,7 @@ fun EditUserScreen(
                             modifier = Modifier.padding(top = 10.dp),
                             onClick = { galleryLauncher2.launch("image/*") }
                         ){
-                            Text(text = "更换头像")
+                            Text(text = "更换头像",fontFamily = FontFamily(Font(R.font.font_1)))
                         }
                     }
                 }
@@ -204,7 +206,7 @@ fun EditUserScreen(
                     value = nameText,
                     onValueChange = { nameText = it },
                     label = {
-                        Text("名称")
+                        Text("名称",fontFamily = FontFamily(Font(R.font.font_1)))
                     },
                     singleLine = true
                 )
@@ -215,7 +217,7 @@ fun EditUserScreen(
                     value = labelText,
                     onValueChange = { labelText = it },
                     label = {
-                        Text("签名")
+                        Text("签名",fontFamily = FontFamily(Font(R.font.font_1)))
                     },
                 )
             }

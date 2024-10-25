@@ -35,6 +35,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.inkstonedemo1.R
@@ -55,7 +57,9 @@ fun AppreciateKnowledgeScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    androidx.compose.material3.Text(text = AppreciateKnowledgeDestination.tabName)
+                    androidx.compose.material3.Text(text = AppreciateKnowledgeDestination.tabName,fontFamily = FontFamily(
+                        Font(R.font.font_1)
+                    ))
                 },
                 navigationIcon = {
                     IconButton(
@@ -148,7 +152,8 @@ fun AppreciateKnowledgeCard(
             Text(
                 text = appreciateKnowledge.title,
                 modifier = Modifier.padding(top = 25.dp),
-                fontSize = 24.sp
+                fontSize = 24.sp,
+                fontFamily = FontFamily(Font(R.font.font_1))
             )
         }
     }
@@ -173,7 +178,9 @@ fun AppreciateKnowledgeDetailCard(
 
         Text(
             text = appreciateKnowledge.content,
-            modifier = Modifier.padding(all = 10.dp)
+            modifier = Modifier.padding(all = 10.dp),
+            fontSize = 18.sp,
+            fontFamily = FontFamily(Font(R.font.font_1))
         )
     }
 }

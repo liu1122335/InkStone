@@ -48,6 +48,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -67,7 +69,7 @@ import com.example.inkstonedemo1.model.ImageShowDestination
 import com.example.inkstonedemo1.model.MainInformationDestination
 import com.example.inkstonedemo1.room.inkstone.InkStone
 import com.example.inkstonedemo1.view.LoadingScreen
-import com.example.inkstonedemo1.viewmodel.MainScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.MainScreenViewModel
 import java.util.Locale
 
 @Composable
@@ -309,7 +311,7 @@ fun TextContent(
         VerticalText(
             text = "描述",
             color = Color.Black,
-            textStyle = TextStyle.Default.copy(fontSize = 20.sp),
+            textStyle = TextStyle(fontFamily = FontFamily(Font(R.font.font_1)), fontSize = 20.sp),
             modifier = Modifier.padding(15.dp)
         )
 
@@ -320,7 +322,8 @@ fun TextContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(end = 20.dp),
-            fontSize = 16.sp
+            fontSize = 16.sp,
+            fontFamily = FontFamily(Font(R.font.font_1))
         )
     }
 }
@@ -344,7 +347,7 @@ fun SizeTextContent(
         VerticalText(
             text = "尺寸",
             color = Color.Black,
-            textStyle = TextStyle.Default.copy(fontSize = 20.sp),
+            textStyle = TextStyle(fontFamily = FontFamily(Font(R.font.font_1)), fontSize = 20.sp),
             modifier = Modifier.padding(start = 15.dp)
         )
 
@@ -380,9 +383,9 @@ fun SizeTextContent(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = height)
-                Text(text = width)
-                Text(text = length)
+                Text(text = height, fontFamily = FontFamily(Font(R.font.font_1)))
+                Text(text = width,fontFamily = FontFamily(Font(R.font.font_1)))
+                Text(text = length,fontFamily = FontFamily(Font(R.font.font_1)))
             }
         }
     }
@@ -405,7 +408,7 @@ fun RelevancyInkStone(
         VerticalText(
             text = "相关藏品",
             color = Color.Black,
-            textStyle = TextStyle.Default.copy(fontSize = 20.sp),
+            textStyle = TextStyle(fontFamily = FontFamily(Font(R.font.font_1)), fontSize = 20.sp),
             modifier = Modifier.padding(start = 15.dp)
         )
 

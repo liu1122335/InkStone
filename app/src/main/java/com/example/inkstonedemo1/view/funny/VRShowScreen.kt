@@ -40,6 +40,7 @@ fun VRShowScreen(
                         )
                     }
                 })*/
+                //加载全景图
                 loadImageFromBitmap(
                     BitmapFactory.decodeResource(
                         resources,

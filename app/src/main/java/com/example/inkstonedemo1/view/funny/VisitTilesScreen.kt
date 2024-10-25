@@ -45,6 +45,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -155,7 +157,8 @@ fun VisitCoverPage(
             modifier = Modifier
                 .align(Alignment.End)
                 .padding(top = 60.dp, end = 30.dp, bottom = 30.dp),
-            fontSize = 35.sp
+            fontSize = 35.sp,
+            fontFamily = FontFamily(Font(R.font.font_1))
         )
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center){
             Image(
@@ -183,12 +186,8 @@ fun VisitCoverPage(
             modifier = Modifier
                 .align(Alignment.Start)
                 .padding(top = 30.dp, start = 30.dp, bottom = 15.dp),
-            fontSize = 35.sp
-        )
-        Text(
-            text = "砚坑紫云谷位于肇庆东南郊烂柯山，西江羚羊峡省级自然保护区内。砚坑拥有端砚开采、加工的悠久历史，中国品质最好的端砚都出自于紫云谷的老坑、坑子、麻子坑三大名坑。" ,
-            modifier = Modifier.padding(horizontal = 15.dp),
-            fontSize = 20.sp
+            fontSize = 35.sp,
+            fontFamily = FontFamily(Font(R.font.font_1))
         )
         val infiniteTransition = rememberInfiniteTransition()
         val offsetY by infiniteTransition.animateFloat(
@@ -252,6 +251,7 @@ fun VisitPage(
             Text(
                 text = tile.name,
                 fontSize = 25.sp,
+                fontFamily = FontFamily(Font(R.font.font_1))
             )
             Icon(
                 painter = painterResource(id = R.drawable.ic_vr),
@@ -267,7 +267,8 @@ fun VisitPage(
         Text(
             text = tile.introduce,
             modifier = Modifier.padding(horizontal = 15.dp),
-            fontSize = 18.sp
+            fontSize = 18.sp,
+            fontFamily = FontFamily(Font(R.font.font_1))
         )
     }
 }

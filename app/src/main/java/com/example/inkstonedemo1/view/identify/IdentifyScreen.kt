@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.example.inkstonedemo1.MyApplication
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.utils.identifyPhoto
 import com.example.inkstonedemo1.utils.rotateIfRequired
@@ -35,7 +36,7 @@ import kotlinx.coroutines.launch
 fun IdentifyScreen(
 
 ){
-    val context = LocalContext.current
+    val context = MyApplication.context
     val modalBottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden, animationSpec = tween(1000))
     val coroutineScope = rememberCoroutineScope()
 

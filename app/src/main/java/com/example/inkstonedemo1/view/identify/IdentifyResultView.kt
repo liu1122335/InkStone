@@ -27,8 +27,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.component.VerticalText
 import com.example.inkstonedemo1.data.allIdentifyData
 import com.example.inkstonedemo1.model.InkStoneTypeKnowledge
@@ -67,29 +71,30 @@ fun IdentifyResultScreen(
                         contentScale = ContentScale.FillBounds
                     )
                 }
-            }
-            item {
                 Text(
                     text = identifyKnowledge.type,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 20.dp),
-                    fontSize = 23.sp
+                    fontSize = 23.sp,
+                    fontFamily = FontFamily(Font(R.font.font_1))
                 )
-
+            }
+            item {
                 Row (
                     horizontalArrangement = Arrangement.SpaceEvenly,
                 ){
                     VerticalText(
                         text = "描述",
-                        color = Color.Black
+                        color = Color.Black,
+                        textStyle = TextStyle(fontFamily = FontFamily(Font(R.font.font_1)), fontSize = 20.sp)
                     )
 
                     Spacer(modifier = Modifier.width(30.dp))
 
                     Text(
                         text = identifyKnowledge.description,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
                     )
                 }
             }
@@ -99,7 +104,8 @@ fun IdentifyResultScreen(
                 ){
                     VerticalText(
                         text = "非遗传承人",
-                        color = Color.Black
+                        color = Color.Black,
+                        textStyle = TextStyle(fontFamily = FontFamily(Font(R.font.font_1)), fontSize = 20.sp)
                     )
 
                     Spacer(modifier = Modifier.width(30.dp))
@@ -130,7 +136,7 @@ fun IdentifyResultScreen(
 
                                 androidx.compose.material3.Text(
                                     text = identifyKnowledge.representativeFigureName[it],
-                                    modifier = Modifier.padding(top = 10.dp)
+                                    modifier = Modifier.padding(top = 10.dp),
                                 )
                             }
                         }
@@ -144,7 +150,8 @@ fun IdentifyResultScreen(
                 ){
                     VerticalText(
                         text = "相关名砚",
-                        color = Color.Black
+                        color = Color.Black,
+                        textStyle = TextStyle(fontFamily = FontFamily(Font(R.font.font_1)), fontSize = 20.sp)
                     )
 
                     Spacer(modifier = Modifier.width(30.dp))
@@ -175,7 +182,7 @@ fun IdentifyResultScreen(
 
                                 androidx.compose.material3.Text(
                                     text = identifyKnowledge.relevancyInkStoneName[it],
-                                    modifier = Modifier.padding(top = 10.dp)
+                                    modifier = Modifier.padding(top = 10.dp),
                                 )
                             }
                         }

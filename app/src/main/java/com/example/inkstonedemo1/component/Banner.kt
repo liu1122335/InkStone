@@ -48,7 +48,7 @@ fun Banner(
     if (isDragged.not()){
         with(pagerState){
             var currentPageKey by remember { mutableIntStateOf(0) }
-            LaunchedEffect(key1 = currentPageKey){
+                LaunchedEffect(key1 = currentPageKey){
                 launch {
                     delay(timeMillis = autoScrollDuration)
                     val nextPage = (currentPage + 1).mod(pageCount)

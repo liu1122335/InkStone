@@ -17,10 +17,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.ui.theme.md_theme_light_tertiaryContainer
 
 @Composable
@@ -63,7 +66,8 @@ fun AppToolsBar(
             textAlign = TextAlign.Center,
             fontSize = 18.sp,
             fontWeight = FontWeight.W500,
-            maxLines = 1
+            maxLines = 1,
+            fontFamily = FontFamily(Font(R.font.font_1))
         )
 
     }

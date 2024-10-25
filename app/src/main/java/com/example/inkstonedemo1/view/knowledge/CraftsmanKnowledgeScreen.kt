@@ -1,5 +1,6 @@
 package com.example.inkstonedemo1.view.knowledge
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -45,6 +46,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -56,6 +59,11 @@ import com.example.inkstonedemo1.model.CraftsmanKnowledgeDestination
 import com.example.inkstonedemo1.model.knowledge.Craftsman
 import com.example.inkstonedemo1.ui.theme.main_surface_color
 
+
+/*
+* 暴雨即将发生，现在在地面上有n根宽度为1的柱子，可以用n个非负整数分别表示每个宽度为1的柱子的高度，柱子在地面上按一字排开，假设每一个1*1的方格中所接的水为1个单位的雨水，要计算按这种方式排列的柱子在下雨后最多能接多少雨水（假设雨水足够多）。
+在求出所能接的最大雨水之前，要先求出每个柱子所能接的最大雨水量，而当后面的柱子高度比前面的低时，是无法接雨水的，为了预防洪涝灾害，请设计一个算法用尽可能少的时间去计算出这些柱子的最大接水量。
+*/
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CraftsmanKnowledgeScreen(
@@ -67,7 +75,7 @@ fun CraftsmanKnowledgeScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = CraftsmanKnowledgeDestination.tabName)
+                    Text(text = CraftsmanKnowledgeDestination.tabName,fontFamily = FontFamily(Font(R.font.font_1)))
                 },
                 navigationIcon = {
                     IconButton(
@@ -105,7 +113,10 @@ fun CraftsmanKnowledgeScreen(
                     )
                 }
             }
-            if (isDetailed){
+            AnimatedVisibility(
+                visible = isDetailed,
+                modifier = Modifier.fillMaxSize()
+            ){
                 Dialog(
                     onDismissRequest = {
                         isDetailed = !isDetailed
@@ -167,14 +178,16 @@ fun CraftsmanCard(
                 ) {
                     Text(
                         text = craftsman.name,
-                        fontSize = 24.sp
+                        fontSize = 24.sp,
+                        fontFamily = FontFamily(Font(R.font.font_1))
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         text = craftsman.introduce,
                         fontSize = 16.sp,
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
+                        fontFamily = FontFamily(Font(R.font.font_1))
                     )
                 }
             }
@@ -234,6 +247,7 @@ fun CraftsmanDetailCrad(
                         Text(
                             text = craftsman.name,
                             fontSize = 20.sp,
+                            fontFamily = FontFamily(Font(R.font.font_1))
                         )
                     }
                 }
@@ -242,12 +256,14 @@ fun CraftsmanDetailCrad(
                 Text(
                     text = craftsman.introduce,
                     modifier = Modifier.padding(horizontal = 8.dp),
+                    fontFamily = FontFamily(Font(R.font.font_1))
                 )
             }
             item {
                 Text(
                     text = craftsman.information,
                     modifier = Modifier.padding(horizontal = 8.dp),
+                    fontFamily = FontFamily(Font(R.font.font_1))
                 )
             }
         }

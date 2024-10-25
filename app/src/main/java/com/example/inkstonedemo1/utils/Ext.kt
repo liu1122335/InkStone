@@ -14,7 +14,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.example.inkstonedemo1.data.allInkStoneClasses
-import com.example.inkstonedemo1.ml.InkstoneModel
+import com.example.inkstonedemo1.ml.InkstoneFp16Model
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
@@ -37,6 +37,7 @@ suspend fun Context.getCameraProvider(): ProcessCameraProvider = suspendCoroutin
 
 private const val fileNameFormat = "yyyy-MM-dd-HH-mm-ss-SSS"
 //拍照并进行保存
+
 fun startTakePhoto(
     imageCapture: ImageCapture,
     executor: Executor,
@@ -78,7 +79,7 @@ fun identifyPhoto(
     bitmap: Bitmap
 ): String{
 
-    val model = InkstoneModel.newInstance(context)
+    val model = InkstoneFp16Model.newInstance(context)
 
     val inputFeature = TensorBuffer.createFixedSize(intArrayOf(1,224,224,3), DataType.FLOAT32)
     val resizeBitmap = Bitmap.createScaledBitmap(bitmap,224,224,true)

@@ -39,6 +39,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,6 +48,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.component.CollectedAnimatedCircle
 import com.example.inkstonedemo1.component.SmallTabRow
 import com.example.inkstonedemo1.component.extractProportions
@@ -58,7 +61,7 @@ import com.example.inkstonedemo1.room.inkstone.InkStone
 import com.example.inkstonedemo1.ui.theme.main_surface_color
 import com.example.inkstonedemo1.ui.theme.md_theme_light_primaryContainer
 import com.example.inkstonedemo1.view.navigateSingleTopTo
-import com.example.inkstonedemo1.viewmodel.UserScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.UserScreenViewModel
 
 
 private val indexTypeList = listOf("端砚","歙砚","陶砚","洮砚","澄泥砚","瓷砚")
@@ -134,8 +137,9 @@ fun UserScreen(
                     )
                     Text(
                         text = userScreenUiState.user.name,
-                        fontSize = 20.sp,
+                        fontSize = 24.sp,
                         modifier = Modifier.padding(start = 10.dp),
+                        fontFamily = FontFamily(Font(R.font.font_1))
                     )
                 }
                 Text(
@@ -144,6 +148,7 @@ fun UserScreen(
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(top = 10.dp),
                     fontSize = 15.sp,
+                    fontFamily = FontFamily(Font(R.font.font_1))
                 )
             }
         }
@@ -219,10 +224,12 @@ fun CollectedShowScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "收藏数"
+                    text = "收藏数",
+                    fontFamily = FontFamily(Font(R.font.font_1))
                 )
                 Text(
-                    text = collectedList.size.toString()
+                    text = collectedList.size.toString(),
+                    fontFamily = FontFamily(Font(R.font.font_1))
                 )
             }
         }
@@ -244,15 +251,20 @@ fun CollectedShowScreen(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Column() {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.SpaceEvenly
+                        ) {
                             Text(
-                                text = indexTypeList[it]
+                                text = indexTypeList[it],
+                                fontFamily = FontFamily(Font(R.font.font_1))
                             )
                             Spacer(modifier = Modifier.height(15.dp))
                             Box(modifier = Modifier.size(width = 60.dp, height = 5.dp).background(color = circleColors[it]))
                         }
                         Text(
                             text = allTypeCountList[it].toInt().toString(),
+                            fontFamily = FontFamily(Font(R.font.font_1))
                         )
                     }
                 }

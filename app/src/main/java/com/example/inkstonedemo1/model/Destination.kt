@@ -24,8 +24,7 @@ object IdentifyDestination : Destination{
 object UserDestination : Destination{
     override val route: String = "User"
     override val icon: Int = R.drawable.ic_user
-    override val tabName: String = "用户"
-
+    override val tabName: String = "我的"
 }
 
 object EditUserDestination : Destination{
@@ -92,7 +91,7 @@ object AppreciateKnowledgeDestination : Destination{
 object CraftsmanKnowledgeDestination : Destination{
     override val route: String = "CraftsmanKnowledge"
     override val icon: Int = R.drawable.ic_craftsman
-    override val tabName: String = "匠人"
+    override val tabName: String = "名匠"
 }
 
 object AllInkStoneListDestination : Destination{
@@ -110,7 +109,7 @@ object MainAllInkStoneListDestination : Destination{
 object FunnyDestination : Destination{
     override val route: String = "Funny"
     override val icon: Int = R.drawable.ic_funny
-    override val tabName: String = "趣玩"
+    override val tabName: String = "探索"
 }
 object VisitTilesDestination : Destination{
     override val route: String = "VisitTiles"

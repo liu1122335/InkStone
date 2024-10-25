@@ -1,5 +1,6 @@
 package com.example.inkstonedemo1.view.funny
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Paint
@@ -34,14 +35,17 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.utils.BitmapUtils
 import com.example.inkstonedemo1.utils.WritingBoardConfig.ITEM_SIZE
-import com.example.inkstonedemo1.viewmodel.UserScreenViewModel
-import com.example.inkstonedemo1.viewmodel.WriteScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.UserScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.WriteScreenViewModel
 
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WritingPreviewScreen(
@@ -67,7 +71,7 @@ fun WritingPreviewScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "笔墨预览")
+                    Text(text = "笔墨预览",fontFamily = FontFamily(Font(R.font.font_1)))
                 },
                 navigationIcon = {
                     IconButton(

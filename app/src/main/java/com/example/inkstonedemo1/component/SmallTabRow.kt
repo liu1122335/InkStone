@@ -28,7 +28,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.model.Destination
 
 @Composable
@@ -110,7 +113,7 @@ fun SmallTab(
         Icon(painter = painterResource(id = icon), contentDescription = text, tint = tabTintColor)
         if (isSelected){
             Spacer(modifier = Modifier.width(12.dp))
-            Text(text = text, color = tabTintColor)
+            Text(text = text, color = tabTintColor,fontFamily = FontFamily(Font(R.font.font_1)))
         }
     }
 }

@@ -17,8 +17,8 @@ import com.example.inkstonedemo1.data.InitInkStoneData
 import com.example.inkstonedemo1.model.uistate.UserScreenUiState
 import com.example.inkstonedemo1.ui.theme.InkStoneDemo1Theme
 import com.example.inkstonedemo1.view.MainScreen
-import com.example.inkstonedemo1.viewmodel.MainScreenViewModel
-import com.example.inkstonedemo1.viewmodel.UserScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.MainScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.UserScreenViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {

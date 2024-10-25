@@ -26,7 +26,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.model.Destination
 import com.example.inkstonedemo1.ui.theme.main_surface_color
 
@@ -100,7 +104,7 @@ fun MyTab(
         Icon(painterResource(id = icon), contentDescription = "" , tint = tabTintColor)
         if (isSelected){
             Spacer(modifier = Modifier.width(12.dp))
-            Text(text = text,color = tabTintColor)
+            Text(text = text, fontSize = 18.sp,color = tabTintColor,fontFamily = FontFamily(Font(R.font.font_1)))
         }
     }
 }

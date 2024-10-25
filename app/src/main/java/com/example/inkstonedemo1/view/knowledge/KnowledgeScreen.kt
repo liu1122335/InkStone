@@ -33,6 +33,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.inkstonedemo1.R
@@ -129,7 +131,9 @@ fun AllKnowledgeRow(
                     contentScale = ContentScale.Crop
                 )
                 Text(
-                    text = "历史"
+                    text = "历史",
+                    fontSize = 24.sp,
+                    fontFamily = FontFamily(Font(R.font.font_1))
                 )
             }
         }
@@ -163,7 +167,9 @@ fun AllKnowledgeRow(
                         contentScale = ContentScale.Crop
                     )
                     Text(
-                        text = "工艺"
+                        text = "工艺",
+                        fontSize = 24.sp,
+                        fontFamily = FontFamily(Font(R.font.font_1))
                     )
                 }
             }
@@ -194,7 +200,9 @@ fun AllKnowledgeRow(
 
                     )
                     Text(
-                        text = "名匠"
+                        text = "名匠",
+                        fontSize = 24.sp,
+                        fontFamily = FontFamily(Font(R.font.font_1))
                     )
                 }
             }
@@ -220,7 +228,7 @@ fun ShowInkStoneRow(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = "名砚", fontSize = 26.sp)
+            Text(text = "名砚", fontSize = 26.sp,fontFamily = FontFamily(Font(R.font.font_1)))
             IconButton(
                 onClick = { onDetailClicked(AllInkStoneListDestination.route) }
             ){

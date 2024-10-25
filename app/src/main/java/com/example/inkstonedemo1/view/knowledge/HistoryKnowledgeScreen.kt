@@ -35,7 +35,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -47,9 +50,8 @@ import com.example.inkstonedemo1.model.HistoryDetailDestination
 import com.example.inkstonedemo1.model.knowledge.HistoryKnowledge
 import com.example.inkstonedemo1.model.MainHistoryKnowledgeDestination
 import com.example.inkstonedemo1.view.navigateSingleTopTo
-import com.example.inkstonedemo1.viewmodel.HistoryKnowledgeScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.HistoryKnowledgeScreenViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HistoryKnowledgeScreen(
     historyKnowledgeScreenViewModel: HistoryKnowledgeScreenViewModel = viewModel(),
@@ -57,11 +59,41 @@ fun HistoryKnowledgeScreen(
 ){
     val navController = rememberNavController()
     val historyKnowledgeScreenUiState by historyKnowledgeScreenViewModel.uiState.collectAsState()
+    NavHost(
+        modifier = Modifier.fillMaxSize()
+            .paint(painter = painterResource(id = R.drawable.bg_element_knowledge_screen)),
+        navController = navController,
+        startDestination = MainHistoryKnowledgeDestination.route,
+    ){
+        composable(route = MainHistoryKnowledgeDestination.route){
+            MainHistoryKnowledgeScreen(
+                onClick = { it ->
+                    historyKnowledgeScreenViewModel.updateCurrentHistoryId(it)
+                    navController.navigateSingleTopTo(HistoryDetailDestination.route)
+                          },
+                onBackButtonClicked = onBackButtonClicked
+            )
+        }
+        composable(route = HistoryDetailDestination.route){
+            HistoryDetailScreen(
+                historyKnowledge = allHistoryKnowledge[historyKnowledgeScreenUiState.currentHistoryId],
+                onBackButtonClicked = { navController.popBackStack() }
+            )
+        }
+    }
+
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MainHistoryKnowledgeScreen(
+    onClick: (Int) -> Unit,
+    onBackButtonClicked: () -> Unit
+){
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = HistoryDetailDestination.tabName)
+                    Text(text = HistoryDetailDestination.tabName,fontFamily = FontFamily(Font(R.font.font_1)))
                 },
                 navigationIcon = {
                     IconButton(
@@ -80,37 +112,17 @@ fun HistoryKnowledgeScreen(
             )
         }
     ){innerPadding ->
-        NavHost(
-            modifier = Modifier.fillMaxSize().padding(innerPadding)
-                .paint(painter = painterResource(id = R.drawable.bg_element_knowledge_screen)),
-            navController = navController,
-            startDestination = MainHistoryKnowledgeDestination.route,
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
         ){
-            composable(route = MainHistoryKnowledgeDestination.route){
-                MainHistoryKnowledgeScreen(onClick = { it ->
-                    historyKnowledgeScreenViewModel.updateCurrentHistoryId(it)
-                    navController.navigateSingleTopTo(HistoryDetailDestination.route)
-                })
-            }
-            composable(route = HistoryDetailDestination.route){
-                HistoryDetailScreen(historyKnowledge = allHistoryKnowledge[historyKnowledgeScreenUiState.currentHistoryId])
-            }
-        }
-    }
-}
-@Composable
-fun MainHistoryKnowledgeScreen(
-    onClick: (Int) -> Unit
-){
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-    ){
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-        ){
-            items(allHistoryKnowledge.size){
-                HistoryKnowledgeCard(historyKnowledge = allHistoryKnowledge[it], index = it , onClick = onClick)
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+            ){
+                items(allHistoryKnowledge.size){
+                    HistoryKnowledgeCard(historyKnowledge = allHistoryKnowledge[it], index = it , onClick = onClick)
+                }
             }
         }
     }
@@ -160,6 +172,8 @@ fun HistoryKnowledgeCard(
 
                     Text(
                         text = historyKnowledge.title,
+                        fontSize = 18.sp,
+                        fontFamily = FontFamily(Font(R.font.font_1))
                     )
                 }
 

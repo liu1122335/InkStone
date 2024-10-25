@@ -23,11 +23,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import com.example.inkstonedemo1.MyApplication.Companion.context
 import com.example.inkstonedemo1.R
 import com.example.inkstonedemo1.utils.BitmapUtils
-import com.example.inkstonedemo1.viewmodel.DetailWritingShowScreenViewModel
-import com.example.inkstonedemo1.viewmodel.UserScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.DetailWritingShowScreenViewModel
+import com.example.inkstonedemo1.intent.viewmodel.UserScreenViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,7 +44,7 @@ fun DetailWritingShowScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "笔墨预览")
+                    Text(text = "笔墨预览",fontFamily = FontFamily(Font(R.font.font_1)))
                 },
                 navigationIcon = {
                     IconButton(
